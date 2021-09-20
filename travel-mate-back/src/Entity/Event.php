@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -67,7 +68,7 @@ class Event
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
      */
-    private $user;
+    private $users;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
@@ -78,6 +79,11 @@ class Event
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
      */
     private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdEvent")
+     */
+    private $creator;
 
     public function __construct()
     {
@@ -201,15 +207,15 @@ class Event
     /**
      * @return Collection|User[]
      */
-    public function getUser(): Collection
+    public function getUsers(): Collection
     {
-        return $this->user;
+        return $this->users;
     }
 
     public function addUser(User $user): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
         }
 
         return $this;
@@ -217,7 +223,7 @@ class Event
 
     public function removeUser(User $user): self
     {
-        $this->user->removeElement($user);
+        $this->users->removeElement($user);
 
         return $this;
     }
@@ -257,6 +263,18 @@ class Event
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): self
+    {
+        $this->creator = $creator;
 
         return $this;
     }

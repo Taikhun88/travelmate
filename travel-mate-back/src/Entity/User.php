@@ -79,9 +79,15 @@ class User
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="creator")
+     */
+    private $createdEvent;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->createdEvent = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,6 +249,36 @@ class User
     {
         if ($this->events->removeElement($event)) {
             $event->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getCreatedEvent(): Collection
+    {
+        return $this->createdEvent;
+    }
+
+    public function addCreatedEvent(Event $createdEvent): self
+    {
+        if (!$this->createdEvent->contains($createdEvent)) {
+            $this->createdEvent[] = $createdEvent;
+            $createdEvent->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedEvent(Event $createdEvent): self
+    {
+        if ($this->createdEvent->removeElement($createdEvent)) {
+            // set the owning side to null (unless already changed)
+            if ($createdEvent->getCreator() === $this) {
+                $createdEvent->setCreator(null);
+            }
         }
 
         return $this;
