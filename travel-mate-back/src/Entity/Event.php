@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
+use DateTimeImmutable;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -89,6 +90,7 @@ class Event
     {
         $this->user = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int

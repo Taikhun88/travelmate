@@ -192,7 +192,7 @@ class User
 
         return $this;
     }
-
+    
     public function getPassword(): ?string
     {
         return $this->password;
