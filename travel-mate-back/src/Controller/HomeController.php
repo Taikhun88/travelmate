@@ -14,12 +14,15 @@ class HomeController extends AbstractController
      */
     public function index(CallApiService $callApiService): Response
     {
-        //dd($callApiService->getCitiesData(), $callApiService->getCountriesData());
+        dd($callApiService->getCitiesData());
         $countriesData = $callApiService->getCountriesData();
+        //dd($countriesData);
 
-        $countryId = $callApiService->getCountriesData(0);
-        dd($countryId);
-
+        foreach ($countriesData as $country) {
+            $countryId = $country['id'];
+            //dump($countryId);
+        }
+        
         return $this->render('home/index.html.twig', [
             'countries' => $countriesData
         ]);
