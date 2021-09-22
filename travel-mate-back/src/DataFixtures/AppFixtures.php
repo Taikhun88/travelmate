@@ -24,12 +24,12 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
         // we call the Faker
         $faker = \Faker\Factory::create();
 
         // terminal message
-        print "Création des users en cours ...\n";
+        print "Création des users en cours ...";
+
         $usersObjectList = [];
 
         // ! USER
@@ -72,7 +72,8 @@ class AppFixtures extends Fixture
             'entraide',
         ];
 
-        print "Création des catégories en cours ...\n";
+        print 'Création des catégories en cours ...';
+
         $categoryObjectList = [];
         foreach ($categories as $categoryName ) {
             $category = new Category;
@@ -83,7 +84,8 @@ class AppFixtures extends Fixture
         }
         // ! EVENT
 
-        print "Création des évènements en cours...";
+        print 'Création des évènements en cours...';
+
 
         // we create data to add to the Event table.
         for ($nbEvents=1; $nbEvents < 10; $nbEvents++) { 
