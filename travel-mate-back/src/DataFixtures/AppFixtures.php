@@ -3,8 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Country;
 use App\Entity\Event;
 use App\Entity\User;
+use App\Service\CallApiService;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -27,6 +29,7 @@ class AppFixtures extends Fixture
 
         // terminal message
         print "Création des users en cours ...";
+
         $usersObjectList = [];
 
         // ! USER
@@ -70,6 +73,7 @@ class AppFixtures extends Fixture
         ];
 
         print 'Création des catégories en cours ...';
+
         $categoryObjectList = [];
         foreach ($categories as $categoryName ) {
             $category = new Category;
@@ -81,6 +85,7 @@ class AppFixtures extends Fixture
         // ! EVENT
 
         print 'Création des évènements en cours...';
+
 
         // we create data to add to the Event table.
         for ($nbEvents=1; $nbEvents < 10; $nbEvents++) { 
