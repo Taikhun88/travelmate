@@ -17,33 +17,42 @@ class Country
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"cities_list"})
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"countries_list"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=City::class, mappedBy="country")
-     * @Groups({"cities_list"})
+     * @ORM\OneToMany(targetEntity=City::class, mappedBy="country") 
+     * 
      */
     private $cities;
 

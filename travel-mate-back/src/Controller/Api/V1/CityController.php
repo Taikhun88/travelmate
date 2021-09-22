@@ -6,7 +6,6 @@ use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/api/v1/city", name="api_v1_city_")
@@ -16,7 +15,7 @@ class CityController extends AbstractController
     /**
      * Page affichant la liste des villes avec la méthode GET
      * 
-     * URL: /api/v1/city:
+     * URL: /api/v1/city
      * Nom de la route : api_v1_city_index
      * 
      * @Route("/", name="index", methods={"GET"})
@@ -26,7 +25,7 @@ class CityController extends AbstractController
         // On affiche seulement la liste des pays pour qu'elle soit visible dans la searchbar, si on clique sur un dropdown
 
         $cityList = $cityRepository->findAll();
-        dd($cityList);
+        //dd($cityList);
 
         return $this->json($cityList, 200, [], [
             'groups' => 'cities_list'
@@ -57,12 +56,8 @@ class CityController extends AbstractController
         }
 
         // On retourne le résultat au format JSON
-        return $this->json($tvShow, 200, [], [
-            'groups' => 'tvshow_detail'
+        return $this->json($city, 200, [], [
+            'groups' => 'city_show'
         ]);
     }
-
-
-
-
 }
