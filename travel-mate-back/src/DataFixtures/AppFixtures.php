@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AppFixtures extends Fixture
 {
 
+    
     private $passwordHasher;
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -21,13 +22,16 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        // we call the Faker
         $faker = \Faker\Factory::create();
 
+        // terminal message
         print "Création des users en cours ...";
         $usersObjectList = [];
 
         // ! USER
 
+        // we create data to add to the User table.
         for ($i = 0; $i < 10; $i++) {
 
             $users = new User();
@@ -52,10 +56,33 @@ class AppFixtures extends Fixture
             $manager->persist($users);
         }  
 
+        // ! CATEGORY
+        // we create data to add to the Category table.
+        $categories = [
+
+            'sport',
+            'culture',
+            'restaurant',
+            'festif',
+            'rencontre',
+            'nature',
+            'entraide',
+        ];
+
+        print 'Création des catégories en cours ...';
+        $categoryObjectList = [];
+        foreach ($categories as $categoryName ) {
+            $category = new Category;
+            $category->setName($categoryName);
+            $category->setImage($faker->image());
+            $categoryObjectList[] = $category;
+            $manager->persist($category);
+        }
         // ! EVENT
 
         print 'Création des évènements en cours...';
 
+        // we create data to add to the Event table.
         for ($nbEvents=1; $nbEvents < 10; $nbEvents++) { 
             $event = new Event;
             $status = mt_rand(0,2);
@@ -74,48 +101,26 @@ class AppFixtures extends Fixture
             } else {
                 $event->setStatus('terminé');
             }
-            
-            // ! CATEGORY
+            $event->setCreator($usersObjectList[mt_rand(0,5)]);
 
-            $categories = [
-
-                'sport',
-                'culture',
-                'restaurant',
-                'festif',
-                'rencontre',
-                'nature',
-                'entraide',
-            ];
-
-            print 'Création des catégories en cours ...';
-            $categoryObjectList = [];
-            foreach ($categories as $categoryName ) {
-                $category = new Category;
-                $category->setName($categoryName);
-                $category->setImage($faker->image());
-                $categoryObjectList[] = $category;
-                $manager->persist($category);
+            // ! Association between category and event
+            // we add one category associate to one event
+            for ($index = 0; $index < 1; $index++) {
+                $event->addCategory($categoryObjectList[mt_rand(0,5)]);
             }
 
-            // ! Association de catégorie et event
-            // On associe l'event à 1 catégorie
-            for ($index = 0; $index < 1; $index++) {
-                // dd($categoryObjectList[$index]);
-                $event->addCategory($categoryObjectList[$index]);
-            }
-
-            // ! Association de user et event
-            // On associe à l'event 1 user (le créateur de l'évenement)
-            for ($index = 0; $index < 1; $index++) {
+            // ! Association between category and event
+            // we add some users associate to one event
+            for ($index = 0; $index < mt_rand(0,5); $index++) {
                 $event->addUser($usersObjectList[$index]);
             }
 
-            // on sauvegarde les données
+
+            // we save the events
             $manager->persist($event);
         }
 
-        // on envoi les nouvelles données en Bdd
+        // we send all the datas to the database
         $manager->flush();
     }
 }

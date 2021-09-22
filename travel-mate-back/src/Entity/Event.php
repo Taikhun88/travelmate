@@ -88,7 +88,7 @@ class Event
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
     }
