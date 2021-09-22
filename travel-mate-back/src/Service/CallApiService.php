@@ -4,6 +4,10 @@ namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+/**
+ * Service permettant de récupérer des informations d'une série
+ * à partir depuis le site https://rapidapi.com/wirefreethought/api/geodb-cities/
+ */
 class CallApiService
 
 {
