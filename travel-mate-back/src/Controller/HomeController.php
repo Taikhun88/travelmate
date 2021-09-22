@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CountryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,14 +13,23 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(CallApiService $callApiService): Response
+    public function index(CallApiService $callApiService, CountryRepository $countryRepository): Response
     {
         //dd($callApiService->getCitiesData(), $callApiService->getCountriesData());
         $countriesData = $callApiService->getCountriesData(); 
+        dump($countriesData);
+
+        $countriesList = $countryRepository->findAll();
+        dump($countriesList);
         
 
-        $cities = $callApiService->getCitiesData(); 
-        dump($cities);
+        // $cities = $callApiService->getCitiesData($); 
+        // dd($countriesData, $cities);
+
+        foreach ($countriesList as $country) {
+            $cities = $callApiService->getCitiesData($country->getCountryCode()); 
+            dump($cities);
+        }
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CityRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -49,9 +50,15 @@ class City
      */
     private $country;
 
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $countryCode;
+
     public function __construct()
     {
         $this->event = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -145,6 +152,18 @@ class City
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCountryCode(): ?string
+    {
+        return $this->countryCode;
+    }
+
+    public function setCountryCode(string $countryCode): self
+    {
+        $this->countryCode = $countryCode;
 
         return $this;
     }

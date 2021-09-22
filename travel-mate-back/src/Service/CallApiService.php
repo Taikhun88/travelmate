@@ -29,11 +29,11 @@ class CallApiService
         return $response->toArray();
     }
 
-    public function getCitiesData(): array
+    public function getCitiesData($countryCode): array
     {
         $response = $this->client->request(
             'GET', 
-            'https://spott.p.rapidapi.com/places/autocomplete?country=FR,ID,JP,MM,US,UK,SP&type=CITY&limit=10'
+            'https://spott.p.rapidapi.com/places/autocomplete?country=' . $countryCode . '&type=CITY&limit=10'
         );     
 
         return $response->toArray();
