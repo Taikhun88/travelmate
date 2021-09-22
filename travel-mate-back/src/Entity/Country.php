@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CountryRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CountryRepository::class)
@@ -16,37 +18,54 @@ class Country
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"countries_list"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"countries_list", "country_show"})
      */
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=City::class, mappedBy="country")
+     * @ORM\OneToMany(targetEntity=City::class, mappedBy="country") 
+     * 
      */
     private $cities;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $countryCode;
 
     public function __construct()
     {
         $this->cities = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -128,6 +147,18 @@ class Country
                 $city->setCountry(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCountryCode(): ?string
+    {
+        return $this->countryCode;
+    }
+
+    public function setCountryCode(string $countryCode): self
+    {
+        $this->countryCode = $countryCode;
 
         return $this;
     }
