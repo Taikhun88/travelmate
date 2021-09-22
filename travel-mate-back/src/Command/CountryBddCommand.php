@@ -71,29 +71,8 @@ class CountryBddCommand extends Command
 
             // success message for each country
             $io->text('the country ' . $name . " added with success");
-
-            $citiesList = $this->callApiService->getCitiesData($countryCode);
-
-            // foreach ($citiesList as $city) {
-            //     $cityName = $city['name'];
-            //     $countryCodeForCity = $city['country']['id'];
-                
-            //     // dd($countryCodeForCity);
-            //     $newCity = new City;
-            //     $newCity->setName($cityName);
-            //     $newCity->setCountryCode($countryCodeForCity);
-
-            //     // we save it 
-            //     $this->manager->persist($newCity);
-                
-            // }
-
-            // // success message for each country
-            // $io->text('Cities  of ' . $name . " added with success");
             
         }
-
-        // dd($newCountry);
 
         // 3) We add all the news countries to the database.
         $this->manager->flush();

@@ -48,22 +48,29 @@ class CityBddCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         
+        // Retrieving the country list from the database.
         $countriesList = $this->countryRepository->findAll();
 
+        // we loop on the countries list to retrieve each country.
         foreach ($countriesList as $country) {
+
+            // the name of each country in the list
+            $countryName = $country->getName();
             
-            $id = $country->getId();
+            // we call the cities list by country code from the Spott Api.
             $citiesList = $this->callApiService->getCitiesData($country->getCountryCode());
 
+            // we loop on the cities list (from Api) to retrieve each city (belong to the country with the same country code)
             foreach ($citiesList as $city) {
                 
+                // Retrieving the country code and all city name
                 $countryCode = $city['country']['id'];
                 $cityName = $city['name'];
 
-
+                // we create a new city object
                 $newCity = new City;
 
-                // we add the country properties to the new country.
+                // we add the city properties to the new city object.
                 $newCity->setName($cityName);
                 $newCity->setCountryCode($countryCode);
                 $newCity->setCountry($country);
@@ -72,6 +79,9 @@ class CityBddCommand extends Command
                 $this->manager->persist($newCity);
 
             }
+
+            // success message for each country
+            $io->text('Cities belongs to ' . $countryName . " added with success");
 
         }
 
