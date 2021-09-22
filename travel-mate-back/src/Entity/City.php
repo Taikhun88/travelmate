@@ -6,6 +6,7 @@ use App\Repository\CityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CityRepository::class)
@@ -16,36 +17,50 @@ class City
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="city")
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $event;
 
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="cities")
+     * 
+     * @Groups({"cities_list", "city_show"})
      */
     private $country;
 
