@@ -6,6 +6,7 @@ use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CountryRepository::class)
@@ -16,6 +17,7 @@ class Country
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"cities_list"})
      */
     private $id;
 
@@ -41,6 +43,7 @@ class Country
 
     /**
      * @ORM\OneToMany(targetEntity=City::class, mappedBy="country")
+     * @Groups({"cities_list"})
      */
     private $cities;
 
