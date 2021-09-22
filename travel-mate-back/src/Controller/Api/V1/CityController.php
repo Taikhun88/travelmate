@@ -22,7 +22,7 @@ class CityController extends AbstractController
         // On affiche seulement la liste des pays pour qu'elle soit visible dans la searchbar. 
 
         $cityList = $cityRepository->findAll();
-        dd($cityList);
+        //dd($cityList);
 
         return $this->render('api/v1/city/index.html.twig', [
             'citiesList' => $cityList,
