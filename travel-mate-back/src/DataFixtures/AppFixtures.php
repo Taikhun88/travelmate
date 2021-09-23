@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\City;
 use App\Entity\Country;
 use App\Entity\Event;
 use App\Entity\User;
@@ -17,15 +18,54 @@ class AppFixtures extends Fixture
 
     
     private $passwordHasher;
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    private $callApiService;
+    public function __construct(UserPasswordHasherInterface $passwordHasher, CallApiService $callApiService)
     {
         $this->passwordHasher = $passwordHasher;
+        $this->callApiService = $callApiService;
     }
 
     public function load(ObjectManager $manager)
     {
         // we call the Faker
         $faker = \Faker\Factory::create();
+
+        // ! COUNTRY & CITY
+
+        $countriesList = $this->callApiService->getCountriesData();
+        // dd($countriesList);
+
+        // terminal message
+        print "Création des pays et des villes en cours ...";
+
+        $cityObjectList = [];
+
+        foreach ($countriesList as $country) {
+            // we create a new object Country
+            $newCountry = new Country;
+            // we add it these properties
+            $newCountry->setName($country['name']);
+            $newCountry->setCountryCode($country['id']);
+            // we save it
+            $manager->persist($newCountry);
+
+            // for each country, we call all the associated cities from the Spott API
+            $citiesList = $this->callApiService->getCitiesData($country['id']);
+
+            // we loop on the cities of each country
+            foreach ($citiesList as $city) {
+                // we create a new object City
+                $newCity = new City;
+                // We add it these properties
+                $newCity->setName($city['name']);
+                $newCity->setCountry($newCountry);
+                $newCity->setCountryCode($country['id']);  
+                // we add the current city in a list to use it to associate one event to one random city  
+                $cityObjectList[] = $newCity;
+                // we save the new city
+                $manager->persist($newCity);
+            }
+        }
 
         // terminal message
         print "Création des users en cours ...";
@@ -107,6 +147,7 @@ class AppFixtures extends Fixture
                 $event->setStatus('terminé');
             }
             $event->setCreator($usersObjectList[mt_rand(0,5)]);
+            $event->setCity($cityObjectList[mt_rand(0,99)]);
 
             // ! Association between category and event
             // we add one category associate to one event
