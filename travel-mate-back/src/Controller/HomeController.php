@@ -20,7 +20,7 @@ class HomeController extends AbstractController
         dump($countriesData);
 
         $countriesList = $countryRepository->findAll();
-        dump($countriesList);
+        // dump($countriesList);
         
 
         // $cities = $callApiService->getCitiesData($); 
