@@ -31,18 +31,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * Display details of a user and buttons to edit or delete profile
-     * 
-     * @Route("/{id}", name="show", methods={"GET"})
-     */
-    public function show(User $user): Response
-    {
-        return $this->render('backoffice/user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request, UserPasswordHasherInterface $passwordHasher): Response
@@ -57,7 +45,7 @@ class UserController extends AbstractController
             $user->setPassword(
                 $passwordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
@@ -65,7 +53,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backoffice/user/new.html.twig', [
@@ -75,18 +63,32 @@ class UserController extends AbstractController
     }
 
     /**
+     * Display details of a user and buttons to edit or delete profile
+     * 
+     * @Route("/{id}", name="show", methods={"GET"})
+     */
+    public function show(User $user): Response
+    {
+        return $this->render('backoffice/user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user, UserPasswordHasherInterface $passwordHasher): Response
     {
+
         // Cette méthode va permettre de décider si on peut accéder
         // à la page d'édition d'un utilisateur
         // La logique autorisant ou non l'accès se fera dans le voter UserVoter
 
         //$this->denyAccessUnlessGranted('USER_EDIT', $user, "Vous ne passerez paaaaas !");
-
+        //dd($user);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             // A la création d'un utilisateur
@@ -103,7 +105,7 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backoffice/user/edit.html.twig', [
@@ -113,16 +115,27 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods={"POST"})
+     * Action permettant la suppression d'une catégorie
+     *
+     * URL : /backoffice/category/{id}/delete
+     * Route : backoffice_user_delete
+     * 
+     * @Route("/{id}/delete", name="delete")
+     * 
+     * @return Response
      */
-    public function delete(Request $request, User $user): Response
+    public function delete(int $id, UserRepository $userRepository)
     {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
+        // On supprime la catégorie en BDD
+        $user = $userRepository->find($id);
+        //dd($user);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
 
-        return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+        // Message flash
+        $this->addFlash('info', 'L\'utilisateur ' . $user->getNickname() . ' a bien été supprimée');
+
+        return $this->redirectToRoute('backoffice_user_index');
     }
 }

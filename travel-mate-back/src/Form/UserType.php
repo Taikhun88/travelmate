@@ -34,8 +34,8 @@ class UserType extends AbstractType
             ->add('age')
             ->add('nationality')
             ->add('language')
-            ->add('createdAt')
-            ->add('updatedAt')
+            //->add('createdAt')
+            //->add('updatedAt')
             ->add('events')
         ;
     }
