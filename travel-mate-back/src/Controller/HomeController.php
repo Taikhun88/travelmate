@@ -15,9 +15,9 @@ class HomeController extends AbstractController
      */
     public function index(CallApiService $callApiService, CountryRepository $countryRepository): Response
     {
-        //dd($callApiService->getCitiesData(), $callApiService->getCountriesData());
-        $countriesData = $callApiService->getCountriesData(); 
-        dump($countriesData);
+        //dd($callApiService->getCitiesData());
+        $countriesData = $callApiService->getCountriesData();
+        //dd($countriesData);
 
         $countriesList = $countryRepository->findAll();
         // dump($countriesList);

@@ -60,8 +60,4 @@ class CityController extends AbstractController
             'groups' => 'city_show'
         ]);
     }
-
-
-
-
 }
