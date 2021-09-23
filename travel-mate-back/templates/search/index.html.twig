@@ -8,12 +8,12 @@
 <form class="d-flex m" action="">
     <input name="search" class="form-control me-2" type="search" placeholder="Ex : ville" aria-label="Search">
 
-    {# <select name="country" id="pet-select">
-        <option value="">--Please choose an option--</option>
-            {% for country in countries %}
-                <option value="">{{ country.name }}</option>
+    <select name="category" id="category-select">
+        <option value="">--Please choose a category--</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
-    </select> #}
+    </select>
 
 
     {# <ul>
