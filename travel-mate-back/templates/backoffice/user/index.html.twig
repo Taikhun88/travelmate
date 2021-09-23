@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Utilisateurs
+{% endblock %}
+
+{% block body %}
+	<h1>Utilisateurs</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Password</th>
+				<th>Lastname</th>
+				<th>Firstname</th>
+				<th>Nickname</th>
+				<th>Image</th>
+				<th>Age</th>
+				<th>Nationality</th>
+				<th>Language</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+					<td>{{ user.password }}</td>
+					<td>{{ user.lastname }}</td>
+					<td>{{ user.firstname }}</td>
+					<td>{{ user.nickname }}</td>
+					<td>{{ user.image }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.nationality }}</td>
+                    <td>{{ user.language }}</td>
+					<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					{<td>
+						<a href="{{ path('backoffice_user_show', {'id': user.id}) }}">voir</a>
+						<a href="{{ path('backoffice_user_edit', {'id': user.id}) }}">editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
+
+			<a href="{{ path('backoffice_user_new') }}">Ajouter</a>
+		</tbody>
+	</table>
+	{% endblock %}
+
