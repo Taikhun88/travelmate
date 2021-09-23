@@ -21,18 +21,19 @@ class SearchController extends AbstractController
 
         // 1) On récupère le mot-clé saisi dans le formulaire de recherche
         $query = $request->query->get('search');
+        
         // dd($query);
 
         // 2) On récupère toutes les séries qui contiennent ce mot-clé
-        // $results = $eventRepository->searchEventByCity($query);
-        // dd($results);
+        $results = $eventRepository->searchEventByCity($query);
+        dump($results);
 
 
 
         return $this->render('search/index.html.twig', [
-            // 'results' => $results,
+            'results' => $results,
             'query' => $query,
-            'cities' => $citiesList
+            // 'cities' => $citiesList
         ]);
     }
 }

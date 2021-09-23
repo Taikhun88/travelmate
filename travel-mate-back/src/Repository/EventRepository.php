@@ -28,13 +28,16 @@ class EventRepository extends ServiceEntityRepository
      * @param $title
      * @return Event[]
      */
+
+
     public function searchEventByCity($city)
     {
         // https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/query-builder.html
         return $this->createQueryBuilder('event')
-            // Clause WHERE pour filtre en fonction de $city
-            ->where('event.city LIKE :city')
-            ->setParameter(':city', "%$city%")
+            // Clause WHERE pour filtre en fonction de $title
+            ->join('event.city', 'city')
+            ->where('city.name LIKE :title')
+            ->setParameter(':title', "%$city%")
             ->getQuery()
             ->getResult();
     }

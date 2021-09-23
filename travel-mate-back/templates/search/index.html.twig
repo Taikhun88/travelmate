@@ -1,4 +1,8 @@
+{% extends 'base.html.twig' %}
 
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
 
 
 <form class="d-flex m" action="">
@@ -41,7 +45,7 @@
 
 
 
-{# 
+
 <h2>
         Résultats de la recherche : 
         <em>{{query}}</em>
@@ -50,4 +54,7 @@
         {% for event in results %}
             <li>{{ event.title }}</li>
         {% endfor %}
-    </ul> #}
+    </ul>
+
+
+{% endblock %}
