@@ -77,26 +77,27 @@ class AppFixtures extends Fixture
         // we create data to add to the User table.
         for ($i = 0; $i < 10; $i++) {
 
-            $users = new User();
+            print 'Création du personnage ' . $i . ' en cours ...';
+            $user = new User();
             $age = mt_rand(18, 40);
 
-            $users->setLastname($faker->lastName);
-            $users->setFirstname($faker->firstName);
-            $users->setNickname($faker->userName);
-            $users->setImage($faker->image);
-            $users->setAge($age);
-            $users->setEmail($faker->email);
-            $users->setNationality("French");
-            $users->setLanguage("Gaulois");     
-            $users->setPassword(
+            $user->setLastname($faker->lastName);
+            $user->setFirstname($faker->firstName);
+            $user->setNickname($faker->userName);
+            $user->setImage($faker->image);
+            $user->setAge($age);
+            $user->setEmail($faker->email);
+            $user->setNationality("French");
+            $user->setLanguage("Gaulois");     
+            $user->setPassword(
                 $this->passwordHasher->hashPassword(
-                    $users,
+                    $user,
                     $faker->password
                 ));   
-            $users->setCreatedAt(new DateTimeImmutable());    
-            $usersObjectList[] = $users;
+            $user->setCreatedAt(new DateTimeImmutable());    
+            $usersObjectList[] = $user;
             
-            $manager->persist($users);
+            $manager->persist($user);
         }  
 
         // ! CATEGORY

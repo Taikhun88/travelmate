@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\CategoryRepository;
-use App\Repository\CityRepository;
-use App\Repository\CountryRepository;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,20 +16,22 @@ class SearchController extends AbstractController
      */
     public function index(CategoryRepository $categoryRepository, EventRepository $eventRepository, Request $request): Response
     {
+        // we get the categories list from the database
         $categoriesList = $categoryRepository->findAll();
 
-        // 1) On récupère le mot-clé saisi dans le formulaire de recherche
+        // we get the search input content
         $query = $request->query->get('search');
-        // dd($query);
-        // 1) On récupère le mot-clé saisi dans le formulaire de recherche
+
+        // we get the select content 
         $category = $request->query->get('category');
+
+        // if category is empty, we send a enpty string to the method
         if (empty($category)) {
             $category='';
         }
 
-        // 2) On récupère tous les evenements qui contiennent ce mot-clé
+        // 2) we get all the matching results
         $results = $eventRepository->searchEventByCity($query, $category);
-        // dump($results);
 
 
 
