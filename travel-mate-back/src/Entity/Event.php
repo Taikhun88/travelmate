@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
+use DateTime;
 use DateTimeImmutable;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -19,54 +21,59 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Assert\NotBlank(message="Please enter an event title")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Assert\NotBlank(message="Please enter an event description")
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $resume;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $participant;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Assert\NotBlank(message="Please choose a date")
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $createdAt;
 
@@ -77,25 +84,26 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $users;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Assert\NotBlank(message="Please enter an event category")
      */
     private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $city;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdEvent")
-     * @Groups({"search_index"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $creator;
 
@@ -104,6 +112,8 @@ class Event
         $this->users = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+        $this->startAt = new DateTimeImmutable('tomorrow');
+        $this->status = 'à venir';
     }
 
     public function getId(): ?int
