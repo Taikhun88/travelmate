@@ -19,32 +19,31 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * method to search events by city and/or category
+     *
+     * @param [type] $city
+     * @param [type] $category
+     * @return Event[]
+     */
+    public function searchEventByCity($city, $category)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+         $query = $this->createQueryBuilder('event')
+            // we join the city property from the event table to the city table
+            ->join('event.city', 'city')
+            // we join the category property from the event table to the category table
+            ->join('event.categories', 'category')
+            // we add a condition to find events by city
+            ->where('city.name LIKE :title')
+            ->setParameter(':title', "%$city%");
+                // if category is null
+                if (!empty($category)) {
+                    // we add condition to find event by category
+                    $query->andWhere('category.id LIKE :category')
+                    ->setParameter(':category', $category);
+                };
+                return $query
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

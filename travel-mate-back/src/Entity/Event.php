@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use DateTimeImmutable;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -23,41 +24,49 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"search_index"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"search_index"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"search_index"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"search_index"})
      */
     private $resume;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"search_index"})
      */
     private $participant;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"search_index"})
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"search_index"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"search_index"})
      */
     private $createdAt;
 
@@ -68,21 +77,25 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
+     * @Groups({"search_index"})
      */
     private $users;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
+     * @Groups({"search_index"})
      */
     private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
+     * @Groups({"search_index"})
      */
     private $city;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdEvent")
+     * @Groups({"search_index"})
      */
     private $creator;
 

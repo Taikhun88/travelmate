@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+<form class="d-flex m" action="">
+    <input name="search" class="form-control me-2" type="search" placeholder="Ex : ville" aria-label="Search">
+
+    <select name="category" id="category-select">
+        <option value="">--Please choose a category--</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+    </select>
+
+    <button class="btn btn-outline-secondary" type="submit">GO</button>
+</form>
+
+
+
+
+<h2>
+        Résultats de la recherche : 
+        <em>{{query}}</em>
+    </h2>
+    <ul>
+        {% for event in results %}
+            <li>{{ event.title }}</li>
+            <li>{{ event.city.name }}</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
