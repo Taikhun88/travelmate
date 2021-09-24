@@ -20,26 +20,13 @@ class SearchController extends AbstractController
      */
     public function index(EventRepository $eventRepository, Request $request, SerializerInterface $serializer): Response
     {
-    
-        // On récupere le JSON
-        // $jasonData = [];
-        $jsonData= $request->query->get('search');
-        // $jsonData[]= $request->query->get('category');
-        // dd($jsonData);
 
-        // 2) On transforme le json en objet : desérialisation
-        // - On indique les données à transformer (desérialiser)
-        // - On indique le format d'arrivé après conversion (objet de type TvShow)
-        // - On indique le format de départ : on veut passer de json vers un objet
-        $query = $serializer->deserialize($jsonData, Event::class, 'json');
-        dd($query);
+        // we get the search input content
+        $query = $request->query->get('search');
 
-        // // we get the search input content
-        // $query = $request->query->get('search');
-        // dd($query);
-        // // we get the select content 
-        // $category = $request->query->get('category');
-        // dd($jsonData);
+        // we get the select content 
+        $category = $request->query->get('category');
+
         // if category is empty, we send a enpty string to the method
         if (empty($category)) {
             $category='';
