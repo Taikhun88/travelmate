@@ -83,7 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="user")
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="users")
      */
     private $events;
 
