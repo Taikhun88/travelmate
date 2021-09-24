@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Backoffice;
 
 use App\Repository\CategoryRepository;
 use App\Repository\EventRepository;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/search", name="search")
+     * @Route("/backoffice/search", name="backoffice_search")
      */
     public function index(CategoryRepository $categoryRepository, EventRepository $eventRepository, Request $request): Response
     {
@@ -35,7 +35,7 @@ class SearchController extends AbstractController
 
 
 
-        return $this->render('search/index.html.twig', [
+        return $this->render('backoffice/search/index.html.twig', [
             'results' => $results,
             'query' => $query,
             'categories' => $categoriesList

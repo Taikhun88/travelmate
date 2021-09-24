@@ -18,7 +18,7 @@ class SearchController extends AbstractController
     /**
      * @Route("/", name="index", methods={"GET"})
      */
-    public function index(EventRepository $eventRepository, Request $request, SerializerInterface $serializer): Response
+    public function index(EventRepository $eventRepository, Request $request): Response
     {
 
         // we get the search input content
@@ -35,6 +35,8 @@ class SearchController extends AbstractController
         // 2) we get all the matching results
         $results = $eventRepository->searchEventByCity($query, $category);
 
-        return $this->json($results, 200);
+        return $this->json($results, 200, [], [
+            'groups' => 'search_index'
+        ]);
     }
 }

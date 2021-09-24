@@ -15,31 +15,6 @@
             {% endfor %}
     </select>
 
-
-    {# <ul>
-        {% for season in tvShow.seasons %}
-            <li>
-                <ul>
-                    {% for episode in season.episodes %}
-                        <li>{{ episode.title }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul> #}
-
-    {# <ul>
-        {% for country in countries %}
-            <li>
-                <ul>
-                    {% for city in country.cities %}
-                        <li>{{ city.name }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul> #}
-
     <button class="btn btn-outline-secondary" type="submit">GO</button>
 </form>
 
@@ -53,6 +28,7 @@
     <ul>
         {% for event in results %}
             <li>{{ event.title }}</li>
+            <li>{{ event.city.name }}</li>
         {% endfor %}
     </ul>
 
