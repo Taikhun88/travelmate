@@ -74,6 +74,12 @@ class City
     {
         $this->event = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

@@ -90,7 +90,16 @@ class Event
     {
         $this->users = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->event = new ArrayCollection();
+
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+        $this->startAt = new DateTimeImmutable('tomorrow');
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
