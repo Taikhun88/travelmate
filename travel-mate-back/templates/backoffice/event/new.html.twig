@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un événement
+{% endblock %}
+
+{% block body %}
+    <h1>Création d'événement - Interface admin</h1>
+
+    {{ include('backoffice/event/_form.html.twig') }}
+
+    <a href="{{ path('backoffice_event_index') }}">back to list</a>
+{% endblock %}

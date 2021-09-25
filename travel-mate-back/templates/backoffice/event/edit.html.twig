@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de l'événement - Travel Mate
+{% endblock %}
+
+{% block body %}
+	<h1>Editer</h1>
+
+	{{ include('backoffice/event/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+	{{ include('backoffice/event/_delete_form.html.twig') }}
+
+	<a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
+{% endblock %}

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -92,7 +93,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="creator")
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="creator", orphanRemoval=true) 
+     * 
      */
     private $createdEvent;
 
@@ -167,7 +169,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // $this->password = null;
     }
 
     public function __construct()
@@ -175,6 +177,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->events = new ArrayCollection();
         $this->createdEvent = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+    }
+
+    public function __toString()
+    {
+        return $this->nickname;
     }
 
     public function getLastname(): ?string

@@ -31,8 +31,6 @@ class HomeController extends AbstractController
             dump($cities);
         }
 
-
-
         return $this->render('home/index.html.twig', [
             'countries' => $countriesData
         ]);
