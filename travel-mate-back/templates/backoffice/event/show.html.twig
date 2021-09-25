@@ -8,56 +8,60 @@
 
 	<table class="table">
 		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ event.id }}</td>
-			</tr>
-			<tr>
-				<th>Ville</th>
-				<td>{{ event.city.name }}</td>
-			</tr>
-			<tr>
-				<th>Auteur de l'événement</th>
-				<td>{{ event.creator.firstname }}</td>
-			</tr>
-			<tr>
-				<th>Intitulé de l'événement</th>
-				<td>{{ event.title}}</td>
-			</tr>
-			<tr>
-				<th>Image</th>
-				<td>{{ event.image }}</td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td>{{ event.content }}</td>
-			</tr>
-			<tr>
-				<th>Nombre de participants</th>
-				<td>{{ event.participant }}</td>
-			</tr>
-			<tr>
-				<th>Début de l'événement</th>
-				<td>{{ event.startAt |date('Y-m-d H:i:s') }}</td>
-			</tr>
-			<tr>
-				<th>Créé le</th>
-				<td>{{ event.createdAt |date('Y-m-d H:i:s') }}</td>
-			</tr>
-			<tr>
-				<th>UpdatedAt</th>
-				<td>{{ event.updatedAt |date('Y-m-d H:i:s') }}</td>
-			</tr>
+
+				<tr>
+					<th>Id</th>
+					<td>{{ event.id }}</td>
+				</tr>
+				<tr>
+					<th>Ville</th>
+					<td>{{ event.city.name }}</td>
+				</tr>
+				<tr>
+					<th>Auteur de l'événement</th>
+					<td>{{ event.creator.id }}</td>
+				</tr>
+				<tr>
+					<th>Intitulé de l'événement</th>
+					<td>{{ event.title}}</td>
+				</tr>
+				<tr>
+					<th>Image</th>
+					<td><img src="#" width="100" alt="Image de la catégorie d'événement">					
+					</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ event.content }}</td>
+				</tr>
+				<tr>
+					<th>Nombre de participants</th>
+					<td>{{ event.participant }}</td>
+				</tr>
+				<tr>
+					<th>Début de l'événement</th>
+					<td>{{ event.startAt |date('Y-m-d H:i:s') }}</td>
+				</tr>
+				<tr>
+					<th>Créé le</th>
+					<td>{{ event.createdAt |date('Y-m-d H:i:s') }}</td>
+				</tr>
+				<tr>
+					<th>UpdatedAt</th>
+					<td>{{ event.updatedAt |date('Y-m-d H:i:s') }}</td>
+				</tr>
 		</tbody>
 	</table>
 
-		{{ include('backoffice/event/_delete_form.html.twig') }} 
+	{{ include('backoffice/event/_delete_form.html.twig') }}
 
 	<a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
-	<a href="{{ path('backoffice_event_delete') }}">Supprimer</a>
+
+	{# This delete button redirects the show page to the delete form thanks to the route
+	Route is composed with path 1st parameter which is the name of the route in our Controller
+	2nd parameter, as we need to specify an ID of the event, we add this information #}
+	<a href="{{ path('backoffice_event_edit', {'id': event.id}) }} ">Modifier</a>
 
 {% endblock %}
-
-{# <a href="{{ path('backoffice_event_edit', {'id': tv_show.id}) }} ">edit</a> #}
 
 

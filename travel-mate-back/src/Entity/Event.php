@@ -99,7 +99,7 @@ class Event
 
     public function __toString()
     {
-        return $this->title;
+        return $this->id . ' ' . $this->title;
     }
 
     public function getId(): ?int

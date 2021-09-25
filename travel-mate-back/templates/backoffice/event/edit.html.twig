@@ -3,18 +3,12 @@
 {% block title %}Modification de l'événement - Travel Mate
 {% endblock %}
 
-{% block content %}
-    <h1>Editer</h1>
+{% block body %}
+	<h1>Editer</h1>
 
-    <p>
-        <a href="{{ path('backoffice_event_add') }}">Ajouter un événement</a>
-        <a href="{{ path('backoffice_event_delete') }}">Supprimer un événement</a>
-    </p>
+	{{ include('backoffice/event/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    {{ include('backoffice/event/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('backoffice/event/_delete_form.html.twig') }}
 
-    <a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
-    
-
-    {{ include('backoffice/event/_delete_form.html.twig') }}
+	<a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
 {% endblock %}

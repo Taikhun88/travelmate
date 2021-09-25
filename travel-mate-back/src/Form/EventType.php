@@ -13,7 +13,7 @@ class EventType extends AbstractType
     {
         $builder
             ->add('title')
-            //->add('image')
+            ->add('image')
             ->add('content')
             //->add('resume')
             ->add('participant')
@@ -24,7 +24,7 @@ class EventType extends AbstractType
             //->add('users')
             //->add('categories')
             ->add('city')
-            //->add('creator')
+            ->add('creator')
         ;
     }
 
