@@ -40,7 +40,7 @@ class EventController extends AbstractController
      * method to get a event by his id
      * 
      * URL : /api/v1/event/{id}
-     * Route : api_v1_event_index
+     * Route : api_v1_event_show
      *
      * @Route("/{id}", name="show", methods={"GET"})
      *
@@ -68,7 +68,7 @@ class EventController extends AbstractController
      * method to add an event to the database
      * 
      * URL : /api/v1/event/
-     * Route : api_v1_event_index
+     * Route : api_v1_event_add
      * 
      * @Route("/", name="add", methods={"POST"})
      *
@@ -105,7 +105,7 @@ class EventController extends AbstractController
      * method to update an event 
      * 
      * URL : /api/v1/event/
-     * Route : api_v1_event_index
+     * Route : api_v1_event_update
      * 
      * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
      *
@@ -150,7 +150,7 @@ class EventController extends AbstractController
      * method to delete an event
      * 
      * URL : /api/v1/event/
-     * Route : api_v1_tvshow_index
+     * Route : api_v1_tvshow_delete
      * 
      * @Route("/{id}", name="delete", methods={"DELETE"})
      *
