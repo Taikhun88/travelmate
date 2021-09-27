@@ -8,6 +8,11 @@
 	<h1>Détails du profil de
 	</h1>
 
+	<p>
+		<a href="{{ path('backoffice_user_edit', {'id': user.id}) }}">Modifier</a>
+	</p>
+
+
 	<table class="table">
 		<tbody>
 			<tr>
@@ -55,18 +60,17 @@
 				<th>Language</th>
 				<td>{{ user.language }}</td>
 			</tr>
-			<th>CreatedAt</th>
-			<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			<tr>
+				<th>CreatedAt</th>
+				<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>UpdatedAt</th>
+				<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
 		</tbody>
-	</tr>
-	<tr>
-		<th>UpdatedAt</th>
-		<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-	</tr>
-</tbody></table>
-
-<a href="{{ path('backoffice_user_index') }}">Retour à la liste</a>
-<a href="{{ path('backoffice_user_edit', {'id': user.id}) }}">Editer</a>
+	</table>
+	<a href="{{ path('backoffice_user_index') }}">Retour à la liste</a>
+	{{ include('backoffice/user/_delete_form.html.twig') }}
 {% endblock %}
 
-{# {{ path('backoffice_user_edit', {'id': user.id}) }} #}{# {{ include('backoffice/user/_delete_form.html.twig') }} #}
