@@ -19,19 +19,19 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"category_list", "category_show"})
+     * @Groups({"category_list", "category_show", "event_list", "event_update", "event_show", "search_index"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"category_list", "category_show"})
+     * @Groups({"category_list", "category_show", "event_list", "event_update", "event_show", "search_index"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"category_list", "category_show"})
+     * @Groups({"category_list", "category_show", "event_list", "event_update", "event_show", "search_index"})
      */
     private $image;
 

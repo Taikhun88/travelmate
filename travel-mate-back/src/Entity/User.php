@@ -22,7 +22,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $id;
 
@@ -30,12 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $roles = [];
 
@@ -47,43 +56,71 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
      /**
      * @ORM\Column(type="string", length=255)
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $image;
 
     /**
      * @ORM\Column(type="smallint")
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+<<<<<<< HEAD
      * @Groups({"user_list", "user_show"})
+=======
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+>>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
      */
     private $language;
 
