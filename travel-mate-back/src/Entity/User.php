@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -21,18 +22,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_list", "user_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * 
+     * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user_list", "user_show"})
      */
     private $roles = [];
 
@@ -44,56 +47,67 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
      /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_list", "user_show"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_list", "user_show"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_list", "user_show"})
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_list", "user_show"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"user_list", "user_show"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_list", "user_show"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_list", "user_show"})
      */
     private $language;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"user_list", "user_show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"user_list", "user_show"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="users")
+     * @Groups({"user_list", "user_show"})
      */
     private $events;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="creator", orphanRemoval=true) 
+     * @Groups({"user_list", "user_show"})
      * 
      */
     private $createdEvent;
