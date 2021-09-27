@@ -1,22 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Les catégories d'événements
+	Catégories d'événement - Backoffice Travel Mate
 {% endblock %}
 
 {% block body %}
-	<main>
-		<h2>Créez une nouvellel catégorie d'événements</h2>
-		<p>
-			<a href="{{ path('backoffice_category_new') }}">Ajouter</a>
-		</p>
-		<ul>
+	<h1>Liste des catégories</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Liste des catégories</th>
+				<th>Image associée</th>
+			</tr>
+		</thead>
+		<tbody>
+		<a href="{{ path('backoffice_category_new') }}">Créer une catégorie</a>
 			{% for category in categories %}
-				<li>
-					{{ category.name }}
-					{# <a href="{{ path('backoffice_category_show', {id:category.id}) }}"></a> #}
-				</li>
+				<tr>
+					<td>{{ category.name }}</td>
+					<td>{{ category.image }}</td>
+					<td>
+						<a href="{{ path('backoffice_category_show', {'id': category.id}) }}">Voir</a>
+					</td>
+				</tr>
 			{% endfor %}
-		</ul>
-	</main>
+		</tbody>
+	</table>
 {% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Détails de nos catégories - Backoffice Travel Mate
+{% endblock %}
+
+{% block body %}
+	<h1>Détails de la catégorie</h1>
+
+	<p>
+		<a href="{{ path('backoffice_category_edit', {'id': categories.id}) }} ">Modifier</a>
+	</p>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ categories.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ categories.name }}</td>
+			</tr>
+			<tr>
+				<th>Image</th>
+				<td>{{ categories.image }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('backoffice_category_index') }}">Retour à la liste des événements</a>
+
+	{{ include('backoffice/category/_delete_form.html.twig') }}
+
+{% endblock %}

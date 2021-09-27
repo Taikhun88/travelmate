@@ -104,13 +104,13 @@ class AppFixtures extends Fixture
         // we create data to add to the Category table.
         $categories = [
 
-            'sport',
-            'culture',
-            'restaurant',
-            'festif',
-            'rencontre',
-            'nature',
-            'entraide',
+            'Sport',
+            'Culture',
+            'Restaurant',
+            'Festif',
+            'Rencontre',
+            'Nature',
+            'Entraide',
         ];
 
         print 'Création des catégories en cours ...';
@@ -141,11 +141,11 @@ class AppFixtures extends Fixture
             $event->setParticipant($faker->numberBetween(0, 10));
             $event->setStartAt(new DateTimeImmutable);
             if ($status = 0) {
-                $event->setStatus('à venir');
+                $event->setStatus('A venir');
             } elseif ($status = 1) {
-                $event->setStatus('en cours');
+                $event->setStatus('En cours');
             } else {
-                $event->setStatus('terminé');
+                $event->setStatus('Terminé');
             }
             $event->setCreator($usersObjectList[mt_rand(0,5)]);
             $event->setCity($cityObjectList[mt_rand(0,99)]);

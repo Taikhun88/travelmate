@@ -20,15 +20,13 @@ class CategoryType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Téléchargez votre image',
 
-                // unmapped means that this field is not associated to any entity property
+                // Indicates if this field is linked, related to a property
                 'mapped' => false,
 
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
+                // This option is helpful in case of editing. image to upload will become optionnal or not basing on boolean value chosen
                 'required' => false,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
+  
+                // Define all the constraints, limits related to the file to be upload thanks to options of File object
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
