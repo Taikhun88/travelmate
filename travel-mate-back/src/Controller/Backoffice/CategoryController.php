@@ -51,7 +51,7 @@ class CategoryController extends AbstractController
         // createForm links the category entity to the form type Category, so all properties are contained in it. Form can be customized
         $form = $this->createForm(CategoryType::class, $category);
 
-        // handleRequest gets all data sent throught the submit action of the form
+        // handleRequest gets all data sent through the submit action of the form
         // 
         $form->handleRequest($request);
 
@@ -62,7 +62,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // enables to upload image manually from the backoffice interface
-            $imageFile = $imageUploader->upload($form, 'imgupload');
+            $imageFile = $imageUploader->upload($form, 'image');
             if ($imageFile) {
                 $category->setImage($imageFile);
             }
@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
             $this->addFlash('success', 'La nouvelle catégorie ' . $category->getName() . ' a bien été créée');
 
             // Redirects to all categories page afterwards
-            return $this->redirectToRoute('backoffice_category_index');
+            return $this->redirectToRoute('backoffice_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
         // createView is the render of the form, it comes after createForm
