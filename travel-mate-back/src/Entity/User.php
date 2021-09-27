@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -21,6 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $id;
 
@@ -28,11 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * 
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"event_list"})
      */
     private $roles = [];
 
@@ -44,36 +48,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
      /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index"})
      */
     private $language;
 
