@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
             $user->setNickname($faker->userName);
-            $user->setImage($faker->image);
+            $user->setImage('https://picsum.photos/600/600');
             $user->setAge($age);
             $user->setEmail($faker->email);
             $user->setNationality("French");
@@ -119,7 +119,7 @@ class AppFixtures extends Fixture
         foreach ($categories as $categoryName ) {
             $category = new Category;
             $category->setName($categoryName);
-            $category->setImage($faker->image());
+            $category->setImage('https://picsum.photos/600/600');
             $categoryObjectList[] = $category;
             $manager->persist($category);
         }
@@ -135,7 +135,7 @@ class AppFixtures extends Fixture
 
 
             $event->setTitle($faker->sentence($nbWords = 3, $variableNbWords = true));
-            $event->setImage($faker->image());
+            $event->setImage('https://picsum.photos/600/600');
             $event->setContent($faker->paragraph($nbSentences = 3, $variableNbSentences = true));
             $event->setResume($faker->sentence($nbWords = 6, $variableNbWords = true));
             $event->setParticipant($faker->numberBetween(0, 10));

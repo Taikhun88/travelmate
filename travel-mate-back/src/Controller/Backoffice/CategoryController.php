@@ -5,11 +5,12 @@ namespace App\Controller\Backoffice;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * Group the route, gives a suffix to all routes created within the class
@@ -41,7 +42,7 @@ class CategoryController extends AbstractController
      *
      * @return Response
      */
-    public function new(Request $request)
+    public function new(Request $request, SluggerInterface $slugger, ImageUploader $imageUploader): Response
     {
         // We start to instantiate an empty object of Category to fill it
         $category = new Category();
@@ -59,6 +60,18 @@ class CategoryController extends AbstractController
         // isValid checks existence of content as said previously
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // enables to upload image manually from the backoffice interface
+            $imageFile = $imageUploader->upload($form, 'imgupload');
+            if ($imageFile) {
+                $category->setImage($imageFile);
+            }
+
+            $nameCategory = $category->getName();
+
+            $slug = $slugger->slug(strtolower($nameCategory));
+
+            $category->setName($slug);
 
             // We call the manager to get new data presaved with persist then we save them permanently with flush within the object filled thanks to the variable
             $em = $this->getDoctrine()->getManager();

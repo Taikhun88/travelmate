@@ -54,17 +54,6 @@ class EventController extends AbstractController
         // They need to be absolute 2 conditions confirmed before receiving request to avoid any attempt of hack. NTUI
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $imageFile = $imageUploader->upload($form, 'imgupload');
-            // if ($imageFile) {
-            //     $event->setImage($imageFile);
-            // }
-
-            // $title = $event->getTitle();
-
-            // $slug = $slugger->slug(strtolower($title));
-
-            // $event->setTitle($slug);
-
             // entityManager calls the Manager to proceed with pre saving and saving. 
             // Persist is needed here just before Flush as we create new data    
             $entityManager = $this->getDoctrine()->getManager();
