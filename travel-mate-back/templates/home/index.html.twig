@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste des pays</h1>
+    {% for country in countries %}
+    <ul>
+        <li>{{ country.name }}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}
+
