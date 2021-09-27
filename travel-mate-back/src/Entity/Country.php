@@ -19,21 +19,21 @@ class Country
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"countries_list", "country_show"})
+     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","category_list", "category_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"countries_list", "country_show"})
+     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","category_list", "category_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"countries_list"})
+     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","category_list", "category_show"})
      */
     private $image;
 
@@ -53,6 +53,7 @@ class Country
 
     /**
      * @ORM\OneToMany(targetEntity=City::class, mappedBy="country") 
+     * @Groups({"countries_list", "country_show"})
      * 
      */
     private $cities;
