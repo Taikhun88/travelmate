@@ -12,9 +12,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet E-mail")
+ * @UniqueEntity(fields={"nickname"}, message="Il existe déjà un compte avec cet pseudo")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -22,11 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $id;
 
@@ -34,17 +33,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
+     * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"user_add"})
      */
     private $roles = [];
 
@@ -56,77 +51,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
      /**
      * @ORM\Column(type="string", length=255)
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="smallint")
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-<<<<<<< HEAD
-     * @Groups({"user_list", "user_show"})
-=======
-     * @Groups({"event_list", "event_show", "event_update", "search_index"})
->>>>>>> 5beb07ee4f023255a2fa21099703a52aa94ee8c4
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $language;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show","user_list","user_show"})
      */
     private $createdAt;
 
@@ -148,6 +115,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      */
     private $createdEvent;
+
+    
 
     public function getId(): ?int
     {

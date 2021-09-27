@@ -21,59 +21,59 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      * @Assert\NotBlank(message="Please enter an event title")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","user_list"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      * @Assert\NotBlank(message="Please enter an event description")
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      */
     private $resume;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      */
     private $participant;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      * @Assert\NotBlank(message="Please choose a date")
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show","user_show"})
      */
     private $createdAt;
 
@@ -84,20 +84,20 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
-     * @Groups({"search_index", "event_show", "event_add", "event_update", "event_delete"})
+     * @Groups({"search_index","event_list", "event_show", "event_add", "event_update", "event_delete"})
      */
     private $users;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","user_show"})
      * @Assert\NotBlank(message="Please enter an event category")
      */
     private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_show"})
      */
     private $city;
 
