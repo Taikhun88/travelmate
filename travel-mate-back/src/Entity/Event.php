@@ -116,6 +116,7 @@ class Event
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
         $this->startAt = new DateTimeImmutable('tomorrow');
+        $this->status = 'en cours';
     }
 
     public function __toString()
