@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
             $user->setNickname($faker->userName);
-            $user->setImage($faker->image);
+            $user->setImage('https://picsum.photos/600/600');
             $user->setAge($age);
             $user->setEmail($faker->email);
             $user->setNationality("French");
@@ -104,13 +104,13 @@ class AppFixtures extends Fixture
         // we create data to add to the Category table.
         $categories = [
 
-            'sport',
-            'culture',
-            'restaurant',
-            'festif',
-            'rencontre',
-            'nature',
-            'entraide',
+            'Sport',
+            'Culture',
+            'Restaurant',
+            'Festif',
+            'Rencontre',
+            'Nature',
+            'Entraide',
         ];
 
         print 'Création des catégories en cours ...';
@@ -119,7 +119,7 @@ class AppFixtures extends Fixture
         foreach ($categories as $categoryName ) {
             $category = new Category;
             $category->setName($categoryName);
-            $category->setImage($faker->image());
+            $category->setImage('https://picsum.photos/600/600');
             $categoryObjectList[] = $category;
             $manager->persist($category);
         }
@@ -135,17 +135,17 @@ class AppFixtures extends Fixture
 
 
             $event->setTitle($faker->sentence($nbWords = 3, $variableNbWords = true));
-            $event->setImage($faker->image());
+            $event->setImage('https://picsum.photos/600/600');
             $event->setContent($faker->paragraph($nbSentences = 3, $variableNbSentences = true));
             $event->setResume($faker->sentence($nbWords = 6, $variableNbWords = true));
             $event->setParticipant($faker->numberBetween(0, 10));
             $event->setStartAt(new DateTimeImmutable);
             if ($status = 0) {
-                $event->setStatus('à venir');
+                $event->setStatus('A venir');
             } elseif ($status = 1) {
-                $event->setStatus('en cours');
+                $event->setStatus('En cours');
             } else {
-                $event->setStatus('terminé');
+                $event->setStatus('Terminé');
             }
             $event->setCreator($usersObjectList[mt_rand(0,5)]);
             $event->setCity($cityObjectList[mt_rand(0,99)]);
