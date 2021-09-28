@@ -19,21 +19,21 @@ class Country
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","category_list", "category_show","user_show"})
+     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","user_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","category_list", "category_show","user_show"})
+     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","user_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","category_list", "category_show","user_show"})
+     * @Groups({"city_show", "countries_list", "country_show", "event_list", "event_update", "event_show","user_show"})
      */
     private $image;
 

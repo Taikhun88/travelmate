@@ -18,7 +18,7 @@ class CallApiService
             $this->client = $client->withOptions([
                 'headers' => [
                     //'x-rapidapi-host' => 'spott.p.rapidapi.com',
-                    'x-rapidapi-key' => '6e73858b1cmsh20d297c76338f56p196278jsn01eb857d2ae8'
+                    'x-rapidapi-key' => '591bcba6cemsh9e0f51ea6c0ad4ep1af5a9jsnc3878cb79cc0'
                 ],    
             ]);
         }
