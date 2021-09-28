@@ -97,7 +97,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add","category_list", "category_show","user_show"})
      */
     private $city;
 

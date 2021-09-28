@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Backoffice;
 
 use App\Repository\CountryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +31,7 @@ class HomeController extends AbstractController
             dump($cities);
         }
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('/backoffice/home/index.html.twig', [
             'countries' => $countriesData
         ]);
 
