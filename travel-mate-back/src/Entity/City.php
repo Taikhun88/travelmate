@@ -19,49 +19,46 @@ class City
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"cities_list", "city_show"})
+     * @Groups({"countries_list", "country_show", "cities_list", "city_show", "event_list", "event_update", "event_show","category_list", "category_show", "search_index","user_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"cities_list", "city_show"})
+     * @Groups({"countries_list", "country_show","cities_list", "city_show", "event_list", "event_update", "event_show","category_list", "category_show", "search_index","user_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"cities_list", "city_show"})
+     * @Groups({"countries_list", "country_show","cities_list", "city_show", "event_list", "event_update","event_show","category_list", "category_show", "search_index","user_show"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * 
-     * @Groups({"cities_list", "city_show"})
+     * @Groups({"cities_list", "city_show", "event_list"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * 
-     * @Groups({"cities_list", "city_show"})
+     * @Groups({"cities_list", "city_show", "event_list"})
      */
     private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="city")
-     * 
-     * @Groups({"cities_list", "city_show"})
      */
     private $event;
 
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="cities")
-     * 
-     * @Groups({"cities_list", "city_show"})
+     * @Groups({"city_show", "event_list", "event_update", "event_show","category_list", "category_show","user_show"})
      */
     private $country;
 

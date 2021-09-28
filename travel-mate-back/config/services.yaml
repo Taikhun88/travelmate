@@ -21,7 +21,7 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    App\Normalizer\EntityNormalizer:
+    App\Normalizer\Normalizer:
         public: false
         autowire: true
         autoconfigure: true

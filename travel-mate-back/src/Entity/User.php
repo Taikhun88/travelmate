@@ -11,9 +11,13 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet E-mail")
+ * @UniqueEntity(fields={"nickname"}, message="Il existe déjà un compte avec cet pseudo")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -21,18 +25,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * 
+     * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
+     * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user_add"})
      */
     private $roles = [];
 
@@ -44,59 +51,72 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
      /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $nickname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $language;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"user_list", "user_show","user_list","user_show"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"user_list", "user_show"})
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="users")
+     * @Groups({"user_list", "user_show"})
      */
     private $events;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="creator", orphanRemoval=true) 
+     * @Groups({"user_list", "user_show"})
      * 
      */
     private $createdEvent;
+
+    
 
     public function getId(): ?int
     {
