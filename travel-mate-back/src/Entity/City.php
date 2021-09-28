@@ -19,21 +19,21 @@ class City
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"countries_list", "country_show", "cities_list", "city_show", "event_list", "event_update", "event_show","category_list", "category_show", "search_index"})
+     * @Groups({"countries_list", "country_show", "cities_list", "city_show", "event_list", "event_update", "event_show","category_list", "category_show", "search_index","user_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"countries_list", "country_show","cities_list", "city_show", "event_list", "event_update", "event_show","category_list", "category_show", "search_index"})
+     * @Groups({"countries_list", "country_show","cities_list", "city_show", "event_list", "event_update", "event_show","category_list", "category_show", "search_index","user_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"countries_list", "country_show","cities_list", "city_show", "event_list", "event_update","event_show","category_list", "category_show", "search_index"})
+     * @Groups({"countries_list", "country_show","cities_list", "city_show", "event_list", "event_update","event_show","category_list", "category_show", "search_index","user_show"})
      */
     private $image;
 
@@ -58,7 +58,7 @@ class City
 
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="cities")
-     * @Groups({"city_show", "event_list", "event_update", "event_show","category_list", "category_show"})
+     * @Groups({"city_show", "event_list", "event_update", "event_show","category_list", "category_show","user_show"})
      */
     private $country;
 
