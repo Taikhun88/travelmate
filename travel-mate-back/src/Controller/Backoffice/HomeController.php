@@ -15,25 +15,26 @@ class HomeController extends AbstractController
      */
     public function index(CallApiService $callApiService, CountryRepository $countryRepository): Response
     {
-        //dd($callApiService->getCitiesData());
-        $countriesData = $callApiService->getCountriesData();
-        //dd($countriesData);
+        // //dd($callApiService->getCitiesData());
+        // $countriesData = $callApiService->getCountriesData();
+        // //dd($countriesData);
 
-        $countriesList = $countryRepository->findAll();
-        // dump($countriesList);
+        // $countriesList = $countryRepository->findAll();
+        // // dump($countriesList);
         
 
-        // $cities = $callApiService->getCitiesData($); 
-        // dd($countriesData, $cities);
+        // // $cities = $callApiService->getCitiesData($); 
+        // // dd($countriesData, $cities);
 
-        foreach ($countriesList as $country) {
-            $cities = $callApiService->getCitiesData($country->getCountryCode()); 
-            dump($cities);
-        }
+        // foreach ($countriesList as $country) {
+        //     $cities = $callApiService->getCitiesData($country->getCountryCode()); 
+        //     dump($cities);
+        // }
 
-        return $this->render('/backoffice/home/index.html.twig', [
-            'countries' => $countriesData
-        ]);
+        return $this->render('/backoffice/home/index.html.twig');
+        // , [
+        //     // 'countries' => $countriesData
+        // ]);
 
     }
 }

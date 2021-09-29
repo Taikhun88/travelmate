@@ -61,7 +61,7 @@ class Event
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
-     * @Assert\NotBlank(message="Please choose a date")
+     * @Assert\GreaterThan("today")
      */
     private $startAt;
 
@@ -91,13 +91,14 @@ class Event
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","user_show"})
-     * @Assert\NotBlank(message="Please enter an event category")
+     * @Assert\NotBlank(message="Please choose at least one category")
      */
     private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
      * @Groups({"search_index", "event_list", "event_show", "event_add","category_list", "category_show","user_show"})
+     * @Assert\NotBlank(message="Please choose a city")
      */
     private $city;
 
@@ -114,9 +115,8 @@ class Event
         $this->event = new ArrayCollection();
 
         $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
-        $this->startAt = new DateTimeImmutable('tomorrow');
-        $this->status = 'en cours';
+        // $this->startAt = new DateTimeImmutable('tomorrow');
+        $this->status = 'A venir';
     }
 
     public function __toString()

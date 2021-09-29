@@ -1,0 +1,86 @@
+/* BODY */
+
+body {
+    background: #FDF6E9;
+}
+
+/* TABLE */
+
+table {
+    table-layout:auto;
+    text-align: center;
+  }
+
+table tr {
+    height: 60px;
+    vertical-align: middle;
+}
+  
+table td {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: Ellipsis;
+}
+
+.show-event_table {
+    width: auto;
+}
+
+/* TITLE */
+
+h1 {
+    margin: 1em 1em 1em 0;
+}
+
+/* BUTTON */
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: white;
+}
+
+/* NAVBAR */
+
+.navbar {
+    background-color: rgb(216, 123, 1);
+}
+
+/* EVENT DETAIL */
+
+.action-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edit-delete-group {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.new-form {
+    margin: 0 200px;
+}
+.new-form h1{
+    text-align: center
+}
+
+.add-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* CATEGORY */
+
+img {
+	max-width: 30%;
+	height: auto;
+}
+
