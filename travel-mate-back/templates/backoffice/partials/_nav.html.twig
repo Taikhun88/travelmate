@@ -3,23 +3,23 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Travel Mate</a>
+    <a class="navbar-brand" href="{{ path('backoffice_home') }}">Travel Mate</a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Evenements</a>
+          <a class="nav-link active" aria-current="page" href="{{ path('backoffice_event_index') }}">Evenements</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Catégories</a>
+          <a class="nav-link" href="{{ path('backoffice_category_index') }}">Catégories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Utilisateurs</a>
+          <a class="nav-link" href="{{ path('backoffice_user_index') }}">Utilisateurs</a>
         </li>
       </ul>
         {% if app.user %}
-            <button>Se déconnecter</button>
+            <button><a href="{{ path('app_logout') }}">Se déconnecter</a></button>
         {% else %}
-            <button>Se connecter</button>
+            <button><a href="{{ path('app_login') }}">Se connecter</a></button>
         {% endif %}
     </div>
   </div>
