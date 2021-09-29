@@ -1,17 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-
-    <h2>Ajout d'une catégorie</h2>
-    {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
-    {{ form_row(formView.image, {'attr': {'class':'geronimo'}}) }}
-
-    <button class="btn btn-primary">Valider</button>
-    {{ form_end(formView) }}
-
-    <p>
-        <a href="{{ path('backoffice_category_index') }}">Retour à la liste</a>
-    </p>
+<div class="container">
+    <div class="new-form">
+        <div class="container-fluid add-form mt-4">
+            <h2>Création d'une catégorie</h2>
+            <button type="button" class="btn btn-outline-secondary mb-4">
+                <a href="{{ path('backoffice_category_index') }}">Retour à la liste des catégories</a>
+            </button>
+        </div>
+        {{ form_start(formView, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(formView.name, {'attr': {'class':'geronimo'}}) }}
+        {{ form_row(formView.image, {'attr': {'class':'geronimo'}}) }}
+        <button class="btn btn-outline-success mt-4 mb-4 container-fluid">
+            {{ button_label|default('Save') }}
+        </button>
+        {{ form_end(formView)}}
+    </div>
+</div>
 
 {% endblock %}
