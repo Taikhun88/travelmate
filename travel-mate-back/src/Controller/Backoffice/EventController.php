@@ -4,6 +4,8 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Event;
 use App\Form\EventType;
+use App\Repository\CityRepository;
+use App\Repository\CountryRepository;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +27,18 @@ class EventController extends AbstractController
     public function index(EventRepository $eventRepository): Response
     {   
         // This method puts lists data in a JSON array
-        $events = $eventRepository->findAll();
+        $events = $eventRepository->findBy(array(), array('id' => 'DESC'));
+
+        $eventToCome = $eventRepository->findBy(array('status' => 'A venir'));
+
+        $eventOver = $eventRepository->findBy(array('status' => 'terminé'));
+        // dd($eventToCome);
 
         // Displays all data on the twig thanks to the variable events
         return $this->render('backoffice/event/index.html.twig', [
             'events' => $events,
+            'eventsToCome' => $eventToCome,
+            'eventOver' => $eventOver
         ]);
     }
 
@@ -38,8 +47,18 @@ class EventController extends AbstractController
      * 
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, CityRepository $cityRepository): Response
     {
+        $cityList = $cityRepository->findAll();
+        dump($cityList);
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         // We call the Request class to get the HTTP request sent through the submit in form
         // then we proceed the instanciation of Event to start filling content form with it
         // if any need to display more or less details, EventType can be set up to match expectactions
@@ -53,6 +72,8 @@ class EventController extends AbstractController
         // then isValid checks that content matches the settings we code. 
         // They need to be absolute 2 conditions confirmed before receiving request to avoid any attempt of hack. NTUI
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $event->setCreator($user);
 
             // entityManager calls the Manager to proceed with pre saving and saving. 
             // Persist is needed here just before Flush as we create new data    
@@ -71,6 +92,7 @@ class EventController extends AbstractController
         return $this->renderForm('backoffice/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
+            'cities' => $cityList
         ]);
     }
 

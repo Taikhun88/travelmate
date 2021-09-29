@@ -59,9 +59,9 @@ class Event
     private $participant;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
-     * @Assert\NotBlank(message="Please choose a date")
+     * @Assert\GreaterThan("today", message="Please choose a date in the future")
      */
     private $startAt;
 
@@ -98,6 +98,7 @@ class Event
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
      * @Groups({"search_index", "event_list", "event_show", "event_add","category_list", "category_show","user_show"})
+     * @Assert\NotBlank(message="Please choose a city")
      */
     private $city;
 
@@ -114,9 +115,9 @@ class Event
         $this->event = new ArrayCollection();
 
         $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
-        $this->startAt = new DateTimeImmutable('tomorrow');
-        $this->status = 'en cours';
+        // $this->updatedAt = new DateTimeImmutable();
+        // $this->startAt = new DateTimeImmutable('tomorrow');
+        $this->status = 'A venir';
     }
 
     public function __toString()

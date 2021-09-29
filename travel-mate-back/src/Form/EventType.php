@@ -2,12 +2,17 @@
 
 namespace App\Form;
 
+use App\Entity\City;
+use App\Entity\Country;
 use App\Entity\Event;
+use App\Repository\CityRepository;
+use DateTimeImmutable;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventType extends AbstractType
 {
@@ -20,15 +25,21 @@ class EventType extends AbstractType
             //->add('resume')
             ->add('participant')
             ->add('startAt', DateTimeType::class,[
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
             ])
-            ->add('status')
+            // ->add('status')
             //->add('createdAt')
-            //->add('updatedAt')
+            
             //->add('users')
-            //->add('categories')
-            ->add('city')
-            ->add('creator')
+            ->add('categories')
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'query_builder' => function(CityRepository $cityRepository) {
+                    return $cityRepository->createQueryBuilder('c')->orderBy('c.name', 'ASC');
+                }
+            ])
+            // ->add('creator')
         ;
     }
 

@@ -5,14 +5,10 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-<<<<<<< HEAD
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-=======
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
->>>>>>> b21af327c08f52a6afbb9bc333d34f7aceaf49dd
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -57,12 +53,6 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-<<<<<<< HEAD
-            ->add('lastname')
-            ->add('firstname')
-            ->add('nickname')
-            ->add('image')
-=======
             ->add('lastname', TextType::class, [
                 'label' => 'Nom de famille',                 
             ])
@@ -93,7 +83,6 @@ class UserType extends AbstractType
                     ])
                 ],
             ] )
->>>>>>> b21af327c08f52a6afbb9bc333d34f7aceaf49dd
             ->add('age')
             ->add('nationality')
             ->add('language')
