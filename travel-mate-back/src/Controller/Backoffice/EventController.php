@@ -170,13 +170,17 @@ class EventController extends AbstractController
      */
     public function addUserToEvent(Event $event) {
 
+        
+        // we get the connected user 
         $user = $this->getUser();
 
+        // we add the connected user to the current event
         $event->addUser($user);
 
+        // we save the new event user to the database
         $this->getDoctrine()->getManager()->flush();
 
-        // Displays a message in case we succeed deleting
+        // Displays a success message 
         $this->addFlash('success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle());
 
         return $this->redirectToRoute('backoffice_event_index');

@@ -5,6 +5,7 @@ namespace App\Controller\Api\V1;
 use App\Entity\Event;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -184,23 +185,24 @@ class EventController extends AbstractController
     /**
      * method to add a user to an event
      * 
-     * @Route("/{id}", name="addUser", methods={"PUT"})
+     * @Route("/{id}", name="addUserToEvent", methods={"PUT"})
      *
      * @param Event $event
      * @return void
      */
     public function addUserToEvent(Event $event) {
 
+        // we get the connected user 
         $user = $this->getUser();
 
+        // we add the connected user to the current event
         $event->addUser($user);
 
+        // we save to the database
         $this->getDoctrine()->getManager()->flush();
 
-        // Displays a message in case we succeed deleting
-        $this->addFlash('success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle());
-
         return $this->json($event, 201, [], [
+            'groups' => 'event_addUser',
             'message' => 'success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle(),
         ]);
     }
