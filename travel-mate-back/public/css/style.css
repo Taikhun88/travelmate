@@ -1,3 +1,9 @@
+/* BODY */
+
+body {
+    background: rgb(253, 246, 233);
+}
+
 /* TABLE */
 
 table {
@@ -45,6 +51,38 @@ a:hover {
 }
 
 /* EVENT DETAIL */
+
+.count {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-over {
+    background: linear-gradient(to right, rgb(192, 82, 49), rgb(231, 69, 69));
+    width: 20em;
+    height: 5rem;
+    text-align: center;
+    padding: 20px;
+}
+
+.event-over p {
+    margin: auto;
+    color: white;
+}
+
+.event-to-come {
+    background: linear-gradient(to right, rgb(11, 119, 17), rgb(15, 182, 23));
+    width: 20em;
+    height: 5rem;
+    text-align: center;
+    padding: 20px;
+}
+.event-to-come p {
+    margin: auto;
+    color: white;
+}
 
 .action-list {
     display: flex;

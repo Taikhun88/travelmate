@@ -7,7 +7,16 @@
 	
 		
 	<div class="container table-responsive">
-		<h1>Liste des événements</h1>
+		<div class="count">
+			<h1>Liste des événements</h1>
+			<div class="event-to-come rounded">
+				<p class="fs-5 fw-bold"> Evenements à venir : {{ eventsToCome | length }} </p>
+			</div>
+			<div class="event-over rounded">
+				<p class="fs-5 fw-bold"> Evenements terminés : {{ eventOver | length }} </p>
+			</div>
+		</div>
+
 		
 		<button type="button" class="btn btn-outline-secondary mb-4">
 			<a class="text-decoration-none" href="{{ path('backoffice_event_new') }}">Ajouter un événement</a>
@@ -16,15 +25,15 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>City ID</th>
-					<th>Creator ID</th>
-					<th>Nom de l'événement</th>
+					<th>City</th>
+					<th>Creator</th>
+					<th>Event name</th>
 					<th>Description</th>
-					<th>Nombre de participants</th>
-					<th>Date de début</th>
-					<th>Statut</th>
-					<th>Créé le</th>
-					<th>Mis à jour le</th>
+					<th>Category</th>
+					<th>Start Date</th>
+					<th>Status</th>
+					<th>Created at</th>
+					<th>Updated at</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -34,10 +43,12 @@
 					<tr>
 						<td>{{ event.id }}</td>
 						<td>{{ event.city.name}}</td>
-						<td>{{ event.creator.firstname }} {{event.creator.lastname}}</td>
+						<td><a href="{{ path('backoffice_user_show', {'id': event.creator.id}) }}"> {{ event.creator.firstname }} {{event.creator.lastname}}</a></td>
 						<td>{{ event.title }}</td>
 						<td class="description_th">{{ event.content }}</td>
-						<td>{{ event.participant }}</td>
+						<td>{% for category in event.categories %}
+							{{ category.name }}
+						{% endfor %}</td>
 						<td>{{ event.startAt | date('y-m-d') }}</td>
 						<td>{{ event.status }}</td>
 						<td>{{ event.createdAt | date('y-m-d') }}</td>
