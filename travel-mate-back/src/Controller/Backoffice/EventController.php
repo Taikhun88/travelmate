@@ -52,7 +52,9 @@ class EventController extends AbstractController
         $cityList = $cityRepository->findAll();
         dump($cityList);
 
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        //dd($request);
+
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // returns your User object, or null if the user is not authenticated
         // use inline documentation to tell your editor your exact User class
@@ -67,12 +69,13 @@ class EventController extends AbstractController
 
         // handleRequest enables to check that content of form is filled the way we want it
         $form->handleRequest($request);
-        
+
         // isSubmitted checks existence of content in all input of Form
         // then isValid checks that content matches the settings we code. 
         // They need to be absolute 2 conditions confirmed before receiving request to avoid any attempt of hack. NTUI
         if ($form->isSubmitted() && $form->isValid()) {
 
+            dd($request->getContent());
             $event->setCreator($user);
 
             // entityManager calls the Manager to proceed with pre saving and saving. 
@@ -109,14 +112,16 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
-    public function edit(int $id, Request $request, Event $event): Response
+    public function edit(Request $request, Event $event): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $eventTitle = $event->getTitle($id);
+            $eventTitle = $event->getTitle();
+
+        // dd($request);
 
             $this->getDoctrine()->getManager()->flush();
 

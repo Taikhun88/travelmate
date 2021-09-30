@@ -61,7 +61,8 @@ class Event
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
-     * @Assert\GreaterThan("today", message="Please choose a date in the future")
+     * @Assert\GreaterThan("today", message="Please select a date in the future")
+     * @Assert\NotBlank(message="please select a date")
      */
     private $startAt;
 
@@ -98,7 +99,7 @@ class Event
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
      * @Groups({"search_index", "event_list", "event_show", "event_add","category_list", "category_show","user_show"})
-     * @Assert\NotBlank(message="Please choose a city")
+     * @Assert\NotBlank(message="Please select a city")
      */
     private $city;
 
@@ -135,7 +136,7 @@ class Event
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -159,7 +160,7 @@ class Event
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
@@ -195,7 +196,7 @@ class Event
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeImmutable $startAt): self
+    public function setStartAt(?\DateTimeImmutable $startAt): self
     {
         $this->startAt = $startAt;
 

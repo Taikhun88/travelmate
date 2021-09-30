@@ -25,15 +25,15 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Ville</th>
-					<th>Createur</th>
-					<th>Nom de l'événement</th>
+					<th>City</th>
+					<th>Creator</th>
+					<th>Event name</th>
 					<th>Description</th>
-					<th>Nombre de participants</th>
-					<th>Date de début</th>
-					<th>Statut</th>
-					<th>Créé le</th>
-					<th>Mis à jour le</th>
+					<th>Category</th>
+					<th>Start Date</th>
+					<th>Status</th>
+					<th>Created at</th>
+					<th>Updated at</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -46,7 +46,9 @@
 						<td><a href="{{ path('backoffice_user_show', {'id': event.creator.id}) }}"> {{ event.creator.firstname }} {{event.creator.lastname}}</a></td>
 						<td>{{ event.title }}</td>
 						<td class="description_th">{{ event.content }}</td>
-						<td>{{ event.participant }}</td>
+						<td>{% for category in event.categories %}
+							{{ category.name }}
+						{% endfor %}</td>
 						<td>{{ event.startAt | date('y-m-d') }}</td>
 						<td>{{ event.status }}</td>
 						<td>{{ event.createdAt | date('y-m-d') }}</td>

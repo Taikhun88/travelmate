@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\City;
 use App\Entity\Country;
 use App\Entity\Event;
@@ -27,12 +28,12 @@ class EventType extends AbstractType
             ->add('startAt', DateTimeType::class,[
                 'widget' => 'single_text',
                 'input' => 'datetime_immutable',
+                'empty_data' => '',
             ])
-            // ->add('status')
-            //->add('createdAt')
-            
-            //->add('users')
-            ->add('categories')
+            ->add('categories', EntityType::class, [
+                'class' => Category::class,
+                'multiple' => true
+            ])
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'query_builder' => function(CityRepository $cityRepository) {
