@@ -132,4 +132,26 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('backoffice_event_index');
     }
+
+    /**
+     * method to add a user to an event
+     * 
+     * @Route("/{id}/add-user", name="addUser")
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function addUserToEvent(Event $event) {
+
+        $user = $this->getUser();
+
+        $event->addUser($user);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        // Displays a message in case we succeed deleting
+        $this->addFlash('success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle());
+
+        return $this->redirectToRoute('backoffice_event_index');
+    }
 }

@@ -107,7 +107,7 @@ class EventController extends AbstractController
      * URL : /api/v1/event/
      * Route : api_v1_event_update
      * 
-     * @Route("/{id}", name="update", methods={"PUT", "PATCH"})
+     * @Route("/{id}", name="update", methods={"PATCH"})
      *
      * @return void
      */
@@ -178,6 +178,30 @@ class EventController extends AbstractController
         return $this->json($eventToDelete, 201, [], [
             'groups' => 'event_delete',
             'message' => 'l\'évènement ' . $id . ' a bien été supprimer'
+        ]);
+    }
+
+    /**
+     * method to add a user to an event
+     * 
+     * @Route("/{id}", name="addUser", methods={"PUT"})
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function addUserToEvent(Event $event) {
+
+        $user = $this->getUser();
+
+        $event->addUser($user);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        // Displays a message in case we succeed deleting
+        $this->addFlash('success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle());
+
+        return $this->json($event, 201, [], [
+            'message' => 'success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle(),
         ]);
     }
 }
