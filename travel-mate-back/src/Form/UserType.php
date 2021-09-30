@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use DateTimeInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -95,6 +96,7 @@ class UserType extends AbstractType
             ]])
             ->add('nationality', ChoiceType::class, [
                 'placeholder' => 'Sélectionnez le pays de naissance',
+                'label' => 'Nationalité',
                 'choices' => [ 
                 'Algérie' => 'DZ',
                 'Argentina' => 'AR',
@@ -124,6 +126,8 @@ class UserType extends AbstractType
                 'United Kingdom' => 'GB',             
             ]])
             ->add('language', ChoiceType::class, [
+                'placeholder' => 'Sélectionnez vos langues parlées',
+                'label' => 'Langues parlées',
                 'choices' => [ 
                     'Afrikaans' => 'AF',
                     'Arabic' => 'AR',
@@ -152,7 +156,7 @@ class UserType extends AbstractType
             ]])
             //->add('createdAt')
             //->add('updatedAt')
-            ->add('events')
+            //->add('events')
         ;
     }
 
