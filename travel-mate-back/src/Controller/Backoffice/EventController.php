@@ -50,7 +50,7 @@ class EventController extends AbstractController
     public function new(Request $request, CityRepository $cityRepository): Response
     {
         $cityList = $cityRepository->findAll();
-        dump($cityList);
+        // dump($cityList);
 
         //dd($request);
 
@@ -75,7 +75,7 @@ class EventController extends AbstractController
         // They need to be absolute 2 conditions confirmed before receiving request to avoid any attempt of hack. NTUI
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dd($request->getContent());
+            // dd($request->getContent());
             $event->setCreator($user);
 
             // entityManager calls the Manager to proceed with pre saving and saving. 
