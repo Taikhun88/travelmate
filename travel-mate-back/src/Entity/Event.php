@@ -85,7 +85,7 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
-     * @Groups({"search_index","event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Groups({"search_index","event_list", "event_show", "event_add", "event_update", "event_delete", "event_addUser"})
      */
     private $users;
 
