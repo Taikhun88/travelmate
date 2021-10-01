@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
+use App\Entity\City;
 use App\Entity\Event;
+use App\Repository\CityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,26 +38,21 @@ class EventType extends AbstractType
                 'max' => 500
             ]])
             ->add('startAt', DateTimeType::class,[
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
+                'empty_data' => '',
             ])
-            ->add('status', ChoiceType::class,[
-                'placeholder' => 'A déterminer',
-                'label' => 'Statut de l\'événement',
-                'choices' => [
-                'A venir' => 'A venir',
-                'En cours' => 'En cours', 
-                'Terminé' => 'Terminé',
-            ]])
-            //->add('createdAt')
-            //->add('updatedAt')
-            //->add('users')
-            //->add('categories')
-            ->add('city', EntityType::class,[
-                'class' => Event::class,
-                'choices' 
-
+            ->add('categories', EntityType::class, [
+                'class' => Category::class,
+                'multiple' => true
             ])
-            //->add('creator')
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'query_builder' => function(CityRepository $cityRepository) {
+                    return $cityRepository->createQueryBuilder('c')->orderBy('c.name', 'ASC');
+                }
+            ])
+            // ->add('creator')
         ;
     }
 

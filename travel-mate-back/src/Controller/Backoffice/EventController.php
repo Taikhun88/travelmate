@@ -4,6 +4,8 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Event;
 use App\Form\EventType;
+use App\Repository\CityRepository;
+use App\Repository\CountryRepository;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +27,18 @@ class EventController extends AbstractController
     public function index(EventRepository $eventRepository): Response
     {   
         // This method puts lists data in a JSON array
-        $events = $eventRepository->findAll();
+        $events = $eventRepository->findBy(array(), array('id' => 'DESC'));
+
+        $eventToCome = $eventRepository->findBy(array('status' => 'A venir'));
+
+        $eventOver = $eventRepository->findBy(array('status' => 'terminé'));
+        // dd($eventToCome);
 
         // Displays all data on the twig thanks to the variable events
         return $this->render('backoffice/event/index.html.twig', [
             'events' => $events,
+            'eventsToCome' => $eventToCome,
+            'eventOver' => $eventOver
         ]);
     }
 
@@ -38,8 +47,20 @@ class EventController extends AbstractController
      * 
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, CityRepository $cityRepository): Response
     {
+        $cityList = $cityRepository->findAll();
+        // dump($cityList);
+
+        //dd($request);
+
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         // We call the Request class to get the HTTP request sent through the submit in form
         // then we proceed the instanciation of Event to start filling content form with it
         // if any need to display more or less details, EventType can be set up to match expectactions
@@ -48,11 +69,14 @@ class EventController extends AbstractController
 
         // handleRequest enables to check that content of form is filled the way we want it
         $form->handleRequest($request);
-        
+
         // isSubmitted checks existence of content in all input of Form
         // then isValid checks that content matches the settings we code. 
         // They need to be absolute 2 conditions confirmed before receiving request to avoid any attempt of hack. NTUI
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // dd($request->getContent());
+            $event->setCreator($user);
 
             // entityManager calls the Manager to proceed with pre saving and saving. 
             // Persist is needed here just before Flush as we create new data    
@@ -71,6 +95,7 @@ class EventController extends AbstractController
         return $this->renderForm('backoffice/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
+            'cities' => $cityList
         ]);
     }
 
@@ -87,14 +112,16 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
-    public function edit(int $id, Request $request, Event $event): Response
+    public function edit(Request $request, Event $event): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $eventTitle = $event->getTitle($id);
+            $eventTitle = $event->getTitle();
+
+        // dd($request);
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -129,6 +156,58 @@ class EventController extends AbstractController
 
         // Displays a message in case we succeed deleting
         $this->addFlash('info', 'L\'événement ' . $event->getTitle() . ' a bien été supprimée');
+
+        return $this->redirectToRoute('backoffice_event_index');
+    }
+
+    /**
+     * method to add a user to an event
+     * 
+     * @Route("/{id}/add-user", name="addUser")
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function addUserToEvent(Event $event) {
+
+        
+        // we get the connected user 
+        $user = $this->getUser();
+
+        // we add the connected user to the current event
+        $event->addUser($user);
+
+        // we save the new event user to the database
+        $this->getDoctrine()->getManager()->flush();
+
+        // Displays a success message 
+        $this->addFlash('success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle());
+
+        return $this->redirectToRoute('backoffice_event_index');
+    }
+
+    /**
+     * method to remove a user from an event
+     * 
+     * @Route("/{id}/remove-user", name="removeUser")
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function removeUserfromEvent(Event $event) {
+
+        
+        // we get the connected user 
+        $user = $this->getUser();
+
+        // we add the connected user to the current event
+        $event->removeUser($user);
+
+        // we save the new event user to the database
+        $this->getDoctrine()->getManager()->flush();
+
+        // Displays a success message 
+        $this->addFlash('success', 'Vous vous êtes bien désinscrit de l\'évènement ' . $event->getTitle());
 
         return $this->redirectToRoute('backoffice_event_index');
     }
