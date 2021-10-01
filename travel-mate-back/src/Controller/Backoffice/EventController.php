@@ -51,6 +51,7 @@ class EventController extends AbstractController
     {
         $cityList = $cityRepository->findAll();
         // dump($cityList);
+        
 
         //dd($request);
 

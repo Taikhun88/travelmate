@@ -90,7 +90,7 @@ class Event
     private $users;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="event")
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","user_show"})
      * @Assert\NotBlank(message="Please enter an event category")
      */
@@ -117,7 +117,7 @@ class Event
 
         $this->createdAt = new DateTimeImmutable();
         // $this->updatedAt = new DateTimeImmutable();
-        // $this->startAt = new DateTimeImmutable('tomorrow');
+        $this->startAt = new DateTimeImmutable('tomorrow');
         $this->status = 'A venir';
     }
 
@@ -275,7 +275,6 @@ class Event
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
-            $category->addEvent($this);
         }
 
         return $this;
@@ -283,9 +282,7 @@ class Event
 
     public function removeCategory(Category $category): self
     {
-        if ($this->categories->removeElement($category)) {
-            $category->removeEvent($this);
-        }
+        $this->categories->removeElement($category);
 
         return $this;
     }
