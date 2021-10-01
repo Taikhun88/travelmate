@@ -185,7 +185,7 @@ class EventController extends AbstractController
     /**
      * method to add a user to an event
      * 
-     * @Route("/{id}", name="addUserToEvent", methods={"PUT"})
+     * @Route("/{id}/subscription", name="addUserToEvent", methods={"PUT"})
      *
      * @param Event $event
      * @return void
@@ -204,6 +204,31 @@ class EventController extends AbstractController
         return $this->json($event, 201, [], [
             'groups' => 'event_addUser',
             'message' => 'success', 'Vous vous êtes bien inscrit à l\'évènement ' . $event->getTitle(),
+        ]);
+    }
+
+    /**
+     * method to remove a user from an event
+     * 
+     * @Route("/{id}/removal", name="removeUserfromEvent", methods={"PUT"})
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function removeUserfromEvent(Event $event) {
+
+        // we get the connected user 
+        $user = $this->getUser();
+
+        // we add the connected user to the current event
+        $event->removeUser($user);
+
+        // we save to the database
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($event, 201, [], [
+            'groups' => 'event_addUser',
+            'message' => 'success', 'Vous vous êtes bien désinscrit de l\'évènement ' . $event->getTitle(),
         ]);
     }
 }

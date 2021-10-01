@@ -185,4 +185,30 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('backoffice_event_index');
     }
+
+    /**
+     * method to remove a user from an event
+     * 
+     * @Route("/{id}/remove-user", name="removeUser")
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function removeUserfromEvent(Event $event) {
+
+        
+        // we get the connected user 
+        $user = $this->getUser();
+
+        // we add the connected user to the current event
+        $event->removeUser($user);
+
+        // we save the new event user to the database
+        $this->getDoctrine()->getManager()->flush();
+
+        // Displays a success message 
+        $this->addFlash('success', 'Vous vous êtes bien désinscrit de l\'évènement ' . $event->getTitle());
+
+        return $this->redirectToRoute('backoffice_event_index');
+    }
 }
