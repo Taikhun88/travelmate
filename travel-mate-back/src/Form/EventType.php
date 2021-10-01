@@ -38,6 +38,7 @@ class EventType extends AbstractType
                 'max' => 500
             ]])
             ->add('startAt', DateTimeType::class,[
+                'label' => 'Commence le',
                 'widget' => 'single_text',
                 'input' => 'datetime_immutable',
                 'empty_data' => '',
@@ -47,6 +48,7 @@ class EventType extends AbstractType
                 'multiple' => true
             ])
             ->add('city', EntityType::class, [
+                'label' => 'Ville',
                 'class' => City::class,
                 'query_builder' => function(CityRepository $cityRepository) {
                     return $cityRepository->createQueryBuilder('c')->orderBy('c.name', 'ASC');
