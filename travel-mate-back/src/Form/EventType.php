@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -50,7 +51,11 @@ class EventType extends AbstractType
             //->add('updatedAt')
             //->add('users')
             //->add('categories')
-            ->add('city')
+            ->add('city', EntityType::class,[
+                'class' => Event::class,
+                'choices' 
+
+            ])
             //->add('creator')
         ;
     }
