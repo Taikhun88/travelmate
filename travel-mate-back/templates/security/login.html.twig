@@ -3,21 +3,37 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+
+<div class="container">
+    <div class="new-form">
+        <div class="container-fluid add-form mt-4">
+<form method="post" class="text-center">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        <div class="alert alert-info">
+            Vous êtes connecté en tant que  {{ app.user.username }} 
+            <button type="button" class="btn btn-outline-danger ms-2">
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </button>
+        </div>
+        <div class="alert alert-info app_login_button">
+            <button type="button" class="btn btn-outline-success ms-2">
+                <a href="{{ path('backoffice_home') }}">Accéder au backoffice de TravelMate</a>
+            </button>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
+
+
+
+
+    <h1 class="h3 mb-3 font-weight-normal ">Please sign in</h1>
+    <label class="mb-1" for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="mb-2 form-control" autocomplete="email" required autofocus>
+    <label class="mb-1" for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -34,9 +50,13 @@
             </label>
         </div>
     #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    <div class="app_login_button mt-3">
+        <button class="container-fluid btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+    </div>
 </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
