@@ -80,8 +80,14 @@ class EventController extends AbstractController
         // 1) we get the Json
         $jsonData = $request->getContent();
 
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         // 2) we transform the Json to an object
         $event = $serialiser->deserialize($jsonData, Event::class, 'json');
+        $event->setCreator($user);
 
         // we validate the object datas with the "Assert" from the Event entity
         $errors = $validator->validate($event);
@@ -114,6 +120,7 @@ class EventController extends AbstractController
      */
     public function update(int $id, EventRepository $eventRepository, Request $request, SerializerInterface $serialiser)
     {
+
         // we get the the datas to the json format
         $jsonData = $request->getContent();
 

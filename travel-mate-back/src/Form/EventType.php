@@ -45,7 +45,8 @@ class EventType extends AbstractType
             ])
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
-                'multiple' => true
+                'multiple' => true,
+                'choice_label' => 'name',
             ])
             ->add('city', EntityType::class, [
                 'label' => 'Ville',
