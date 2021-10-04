@@ -66,7 +66,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * method to get a user by his id
+     * method to create a new user
      * 
      * URL : /api/v1/user
      * Route : api_v1_user_add
