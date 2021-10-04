@@ -74,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $image;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint",nullable=true)
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $age;
