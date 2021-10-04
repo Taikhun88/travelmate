@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\User;
+use DateTimeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
 
 class UserType extends AbstractType
 {
@@ -27,7 +29,7 @@ class UserType extends AbstractType
             ))
             ->add('roles',
             ChoiceType::class,
-            [
+            [   
                 'choices' => [
                     'ROLE_USER' => 'ROLE_USER',
                     //'ROLE_EDITOR' => 'ROLE_EDITOR',
@@ -83,12 +85,77 @@ class UserType extends AbstractType
                     ])
                 ],
             ] )
-            ->add('age')
-            ->add('nationality')
-            ->add('language')
+            ->add('age', IntegerType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [new Positive()],
+                'attr' => [
+                'min' => 18,
+                'max' => 100
+            ]])
+            ->add('nationality', ChoiceType::class, [
+                'placeholder' => 'Sélectionnez le pays de naissance',
+                'label' => 'Nationalité',
+                'choices' => [ 
+                'Algérie' => 'DZ',
+                'Argentina' => 'AR',
+                'Australia' => 'AU',
+                'Belgium' => 'BE',
+                'Canada' => 'CA',
+                'China' => 'CN',
+                'France' => 'FR',
+                'Croatia' => 'HR',
+                'Germany' => 'DE',                
+                'HK' => 'Hong Kong',               
+                'IN' => 'India',                
+                'IT' => 'Italy',
+                'JP' => 'Japan',
+                'KP' => 'Korea, Democratic People\'s Republic of',                
+                'Mexico' => 'MX',             
+                'Qatar' => 'QA',              
+                'Saudi Arabia' => 'SA',
+                'Senegal' => 'SN',             
+                'Singapore' => 'SG',
+                'Spain' => 'ES',
+                'Sweden' => 'SE',
+                'Switzerland' => 'CH',
+                'Taiwan' => 'TW',
+                'Turkey' => 'TR',            
+                'United Arab Emirat' => 'AE',
+                'United Kingdom' => 'GB',             
+            ]])
+            ->add('language', ChoiceType::class, [
+                'placeholder' => 'Sélectionnez vos langues parlées',
+                'label' => 'Langues parlées',
+                'choices' => [ 
+                    'Afrikaans' => 'AF',
+                    'Arabic' => 'AR',
+                    'Chinese' => 'ZH',
+                    'Croatian' => 'HR',
+                    'Czech' => 'CZ',
+                    'Dutch' => 'NL',
+                    'English' => 'EN',
+                    'French' => 'FR',
+                    'German' => 'DE',
+                    'Hindi' => 'HI',
+                    'Hungarian' => 'HU',
+                    'Indonesian' => 'ID',
+                    'Italian' => 'IT',
+                    'Japanese' => 'JA',
+                    'Khmer' => 'KM',
+                    'Korean' => 'KO',
+                    'Norwegian' => 'NO',
+                    'Polish' => 'PL',
+                    'Portuguese' => 'PT',
+                    'Punjabi' => 'PA',
+                    'Russian' => 'RU',
+                    'Spanish' => 'ES',
+                    'Thai' => 'TH',
+                    'Turkish' => 'TR',             
+            ]])
             //->add('createdAt')
             //->add('updatedAt')
-            ->add('events')
+            //->add('events')
         ;
     }
 
