@@ -24,7 +24,8 @@ class CityController extends AbstractController
     {
         // On affiche seulement la liste des pays pour qu'elle soit visible dans la searchbar, si on clique sur un dropdown
 
-        $cityList = $cityRepository->findAll();
+        // $cityList = $cityRepository->findAll();
+        $cityList = $cityRepository->findBy([],['name' => 'ASC']);
         //dd($cityList);
 
         return $this->json($cityList, 200, [], [
