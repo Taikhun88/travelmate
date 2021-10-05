@@ -100,19 +100,54 @@ h1 {
 
 /* BUTTON */
 
-a {
-    text-decoration: none;
-    color: black;
+.btn{
+    background-color : white;
+    font-weight: bolder;
+    color: rgba(2, 62, 138,1);
 }
 
-a:hover {
-    color: black;
+.btn:hover{
+    background-color: rgba(2, 62, 138,0.05);
+    border: none;
+    font-weight: bolder;
+    color: white;
 }
 
 /* NAVBAR */
 
 .navbar {
-    background-color: rgb(216, 123, 1);
+    background-color: rgba(2, 62, 138,1);
+}
+
+.navbar-light .navbar-brand{
+    color: white;
+    font-weight: bolder;
+}
+
+.navbar-light .navbar-brand:hover{
+    color: white;
+    font-weight: bolder;
+
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: white;
+    font-weight: bolder;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: white;
+    font-weight: bolder;
+}
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link{
+    color: orange;
+}
+
+/* BACKOFFICE */
+
+.card-home-button .card-home-button-event .card-body .btn  .container-fluid:hover{
+    background-color: none;
 }
 
 /* EVENT DETAIL */

@@ -3,11 +3,11 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="{{ path('backoffice_home') }}">Travel Mate</a>
+    <a class="navbar-brand navbar-light" href="{{ path('backoffice_home') }}">Travel Mate</a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link{{ currentRoute == 'backoffice_event_index' ? ' active':'' }}" aria-current="page" href="{{ path('backoffice_event_index') }}">Evenements</a>
+          <a class="nav-link{{ currentRoute == 'backoffice_event_index' ? ' active':'' }}" aria-current="page" href="{{ path('backoffice_event_index') }}">Évenements</a>
         </li>
         <li class="nav-item">
           <a class="nav-link{{ currentRoute in ['backoffice_category_index', 'backoffice_category_show'] ? ' active':'' }}" href="{{ path('backoffice_category_index') }}">Catégories</a>
@@ -21,7 +21,7 @@
               <a class="text-decoration-none" href="{{ path('app_logout') }}">se déconnecter</a>
             </button>
         {% else %}
-            <button type="button" class="btn btn-outline-secondary">
+            <button type="button" class="btn btn-secondary">
               <a class="text-decoration-none" href="{{ path('app_login') }}">Se connecter</a>
             </button>
         {% endif %}
