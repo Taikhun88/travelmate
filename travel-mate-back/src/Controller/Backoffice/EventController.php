@@ -126,7 +126,7 @@ class EventController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'L\'event ' . $eventTitle . ' a bien été créé');
+            $this->addFlash('success', 'L\'évènement ' . $eventTitle . ' a bien été modifié');
 
             return $this->redirectToRoute('backoffice_event_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -31,7 +31,7 @@ class HomeController extends AbstractController
         //     dump($cities);
         // }
 
-        $welcome = "Accueil de l'interface admin";
+        $welcome = "Bienvenue sur le backoffice de Travel Mate";
 
         return $this->render('/backoffice/home/index.html.twig', [
             'welcome_message' => $welcome

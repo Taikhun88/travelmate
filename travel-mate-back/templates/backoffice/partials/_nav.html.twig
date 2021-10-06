@@ -17,11 +17,16 @@
         </li>
       </ul>
         {% if app.user %}
-            <button type="button" class="btn btn-secondary">
+          <div class="connected">
+            <div class="connected-user">
+              <p>Vous etes connecté en tant que :   <em>{{ app.user.firstname }} {{ app.user.lastname }}</em></p>
+            </div>
+            <button type="button" class="btn btn-logout">
               <a class="text-decoration-none" href="{{ path('app_logout') }}">se déconnecter</a>
             </button>
+          </div>
         {% else %}
-            <button type="button" class="btn btn-secondary">
+            <button type="button" class="btn btn-login">
               <a class="text-decoration-none" href="{{ path('app_login') }}">Se connecter</a>
             </button>
         {% endif %}
