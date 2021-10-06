@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Barre de recherche{% endblock %}
 
 {% block body %}
 
@@ -9,13 +9,13 @@
     <input name="search" class="form-control me-2" type="search" placeholder="Ex : ville" aria-label="Search">
 
     <select name="category" id="category-select">
-        <option value="">--Please choose a category--</option>
+        <option value="">--Merci de choisir une catégorie--</option>
             {% for category in categories %}
                 <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
     </select>
 
-    <button class="btn btn-outline-secondary" type="submit">GO</button>
+    <button class="btn btn-outline-secondary" type="submit">Aller</button>
 </form>
 
 
