@@ -74,11 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $image;
 
     /**
-<<<<<<< HEAD
-     * @ORM\Column(type="smallint", nullable=true)
-=======
      * @ORM\Column(type="smallint",nullable=true)
->>>>>>> feature/add-forgot-password
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $age;

@@ -260,6 +260,18 @@ em {
     background: rgb(223, 86, 86);
 }
 
+/* RESET PASSWORD */
+
+.reset-password-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reset-password-form form{
+    text-align: center;
+}
+
 /* EVENT DETAIL */
 
 .count {

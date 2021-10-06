@@ -7,57 +7,57 @@
 <div class="container">
     <div class="new-form">
         <div class="container-fluid add-form mt-4">
-<form method="post" class="text-center">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+            <form method="post" class="text-center">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-    {% if app.user %}
-        <div class="alert alert-info">
-            Vous êtes connecté en tant que  {{ app.user.username }} 
-            <button type="button" class="btn btn-outline-danger ms-2">
-                <a href="{{ path('app_logout') }}">Se déconnecter</a>
-            </button>
-        </div>
-        <div class="alert alert-info app_login_button">
-            <button type="button" class="btn btn-outline-success ms-2">
-                <a href="{{ path('backoffice_home') }}">Accéder au backoffice de TravelMate</a>
-            </button>
-        </div>
-    {% endif %}
-
-
+                {% if app.user %}
+                    <div class="alert alert-info">
+                        Vous êtes connecté en tant que  {{ app.user.username }} 
+                        <button type="button" class="btn btn-outline-danger ms-2">
+                            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </button>
+                    </div>
+                    <div class="alert alert-info app_login_button">
+                        <button type="button" class="btn btn-outline-success ms-2">
+                            <a href="{{ path('backoffice_home') }}">Accéder au backoffice de TravelMate</a>
+                        </button>
+                    </div>
+                {% endif %}
 
 
 
-    <h1 class="h3 mb-3 font-weight-normal ">Merci de vous identifier</h1>
-    <label class="mb-1" for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="mb-2 form-control" autocomplete="email" required autofocus>
-    <label class="mb-1" for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <div>
-        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
-    </div>
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-    <div class="app_login_button mt-3">
-        <button class="container-fluid btn btn-lg btn-primary" type="submit">
-            Se connecter
-        </button>
-    </div>
-</form>
+                <h1 class="h3 mb-3 font-weight-normal ">Merci de vous identifier</h1>
+                <label class="mb-1" for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="mb-2 form-control" autocomplete="email" required autofocus>
+                <label class="mb-1" for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                <div>
+                    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+                </div>
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+
+                {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                #}
+                <div class="app_login_button mt-3">
+                    <button class="container-fluid btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
