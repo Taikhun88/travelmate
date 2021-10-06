@@ -156,7 +156,7 @@ class EventController extends AbstractController
         $em->flush();
 
         // Displays a message in case we succeed deleting
-        $this->addFlash('info', 'L\'événement ' . $event->getTitle() . ' a bien été supprimée');
+        $this->addFlash('danger', 'L\'événement ' . $event->getTitle() . ' a bien été supprimé');
 
         return $this->redirectToRoute('backoffice_event_index');
     }

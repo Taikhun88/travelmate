@@ -31,15 +31,15 @@
 				<td>{{ user.email }}</td>
 			</tr>
 			<tr>
-				<th>Roles</th>
+				<th>Rôles</th>
 				<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
 			</tr>
 			<tr>
-				<th>Firstname</th>
+				<th>Prénom(s)</th>
 				<td>{{ user.firstname }}</td>
 			</tr>
 			<tr>
-				<th>Lastname</th>
+				<th>Nom de famille</th>
 				<td>{{ user.lastname }}</td>
 			</tr>
 			<tr>
@@ -51,19 +51,19 @@
 				<td>{{ user.age }}</td>
 			</tr>
 			<tr>
-				<th>Nationality</th>
+				<th>Nationalité</th>
 				<td>{{ user.nationality }}</td>
 			</tr>
 			<tr>
-				<th>Language</th>
+				<th>Langage</th>
 				<td>{{ user.language }}</td>
 			</tr>
 			<tr>
-				<th>CreatedAt</th>
+				<th>Créé le</th>
 				<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
 			<tr>
-				<th>UpdatedAt</th>
+				<th>Mise à jour le</th>
 				<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
 		</tbody>
