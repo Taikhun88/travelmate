@@ -29,6 +29,7 @@ class AuthenticationSuccessListener
         'age' => $user->getAge(),
         'nationality' => $user->getNationality(),
         'language' => $user->getLanguage(),
+        'IsVerified' => $user->isVerified(),
         );
 
         $event->setData($data);

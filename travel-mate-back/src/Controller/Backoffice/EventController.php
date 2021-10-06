@@ -147,13 +147,16 @@ class EventController extends AbstractController
      * 
      * @return Response
      */
-    public function delete(int $id, EventRepository $eventRepository)
+    public function delete(int $id, EventRepository $eventRepository, Request $request)
     {
         $event = $eventRepository->find($id);
         //dd($event);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($event);
-        $em->flush();
+
+        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($event);
+            $em->flush();
+        }
 
         // Displays a message in case we succeed deleting
         $this->addFlash('danger', 'L\'événement ' . $event->getTitle() . ' a bien été supprimé');

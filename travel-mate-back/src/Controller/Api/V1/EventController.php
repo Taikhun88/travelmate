@@ -166,7 +166,7 @@ class EventController extends AbstractController
      * @param EventRepository $tvShowRepository
      * @return void
      */
-    public function delete($id,  EventRepository $eventRepository) {
+    public function delete($id,  EventRepository $eventRepository, Request $request) {
         
         // we get the event to delete
         $eventToDelete = $eventRepository->find($id);
@@ -178,10 +178,12 @@ class EventController extends AbstractController
             ], 404);
         }
 
-        // we call the manager to save the deletion
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($eventToDelete);
-        $em->flush();
+        if ($this->isCsrfTokenValid('delete'.$eventToDelete->getId(), $request->request->get('_token'))) {
+            // we call the manager to save the deletion
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($eventToDelete);
+            $em->flush();
+        }
 
         return $this->json($eventToDelete, 201, [], [
             'groups' => 'event_delete',

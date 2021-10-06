@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
-     * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add"})
+     * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add", "reset_password"})
      */
     private $email;
 
@@ -74,7 +74,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $image;
 
     /**
+<<<<<<< HEAD
      * @ORM\Column(type="smallint", nullable=true)
+=======
+     * @ORM\Column(type="smallint",nullable=true)
+>>>>>>> feature/add-forgot-password
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $age;
