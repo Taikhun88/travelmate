@@ -51,6 +51,9 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // Displays a message in case we succeed deleting
+            $this->addFlash('success', 'L\'utilisateur ' . $user->getFirstname() . $user->getLastname() . ' a bien été créé');
+
             return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -103,6 +106,9 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            // Displays a message in case we succeed deleting
+            $this->addFlash('success', 'L\'utilisateur ' . $user->getFirstname() . $user->getLastname() . ' a bien été modifié');
+
             return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
         }
         
@@ -134,7 +140,7 @@ class UserController extends AbstractController
         $em->flush();
 
         // Message flash
-        $this->addFlash('info', 'L\'utilisateur ' . $user->getNickname() . ' a bien été supprimée');
+        $this->addFlash('danger', 'L\'utilisateur ' . $user->getFirstname() . $user->getLastname() . ' a bien été supprimé');
 
         return $this->redirectToRoute('backoffice_user_index');
     }
