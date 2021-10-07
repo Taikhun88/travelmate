@@ -133,8 +133,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $gender;
 
-    
-
     public function getId(): ?int
     {
         return $this->id;
