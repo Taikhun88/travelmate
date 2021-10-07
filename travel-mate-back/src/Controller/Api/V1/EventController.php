@@ -194,7 +194,7 @@ class EventController extends AbstractController
     /**
      * method to add a user to an event
      * 
-     * @Route("/{id}/subscription", name="addUserToEvent", methods={"PUT"})
+     * @Route("/subscription/{id}", name="addUserToEvent", methods={"PUT"})
      *
      * @param Event $event
      * @return void
@@ -219,7 +219,7 @@ class EventController extends AbstractController
     /**
      * method to remove a user from an event
      * 
-     * @Route("/{id}/removal", name="removeUserfromEvent", methods={"PUT"})
+     * @Route("/removal/{id}", name="removeUserfromEvent", methods={"PUT"})
      *
      * @param Event $event
      * @return void

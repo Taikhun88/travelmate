@@ -23,6 +23,7 @@ class AuthenticationSuccessListener
         $data['data'] = array(
         'roles' => $user->getRoles(),
         'username' => $user->getUserIdentifier(),
+        'id' => $user->getId(),
         'firstname' => $user->getFirstname(),
         'lastname' => $user->getLastname(),
         'nickname' => $user->getNickname(),

@@ -54,4 +54,10 @@ security:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/v1/event,       roles: PUBLIC_ACCESS }
         - { path: ^/api/v1/category,       roles: PUBLIC_ACCESS }
+        - { path: ^/api/v1/category,       roles: PUBLIC_ACCESS }
+        - { path: ^/api/v1/event/subscription,       roles: ROLE_USER }
+        - { path: ^/api/v1/event/removal,       roles: ROLE_USER }
         - { path: ^/api,       roles: PUBLIC_ACCESS }
+
+    role_hierarchy:
+        ROLE_ADMIN:         ROLE_USER
