@@ -19,7 +19,7 @@
         {% if app.user %}
           <div class="connected">
             <div class="connected-user">
-              <p>Vous etes connecté en tant que :   <em>{{ app.user.firstname }} {{ app.user.lastname }}</em></p>
+              <p>Vous etes connecté en tant que : <strong><bold>{{ app.user.firstname }} {{ app.user.lastname }}</bold></strong></p>
             </div>
             <button type="button" class="btn btn-logout">
               <a class="text-decoration-none" href="{{ path('app_logout') }}">se déconnecter</a>
