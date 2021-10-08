@@ -5,6 +5,10 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+h1, h2, .hello {
+    font-family: 'nunito sans';
+}
+
 a {
     text-decoration: none;
 }
@@ -19,6 +23,7 @@ a {
 /* BUTTON */
 
 .btn{
+    padding: 5px 0px;
     background-color : white;
     font-weight: bolder;
     color: rgba(2, 62, 138,1);
@@ -30,8 +35,8 @@ a {
 }
 
 .btn a {
-    margin: 0;
-    padding: 20px 2px;
+    margin: 2px;
+    padding: 15px 15px;
 }
 .btn a:hover{
     color: white;
@@ -154,6 +159,20 @@ table td {
     text-overflow: Ellipsis;
 }
 
+tr {
+    border: 2px rgba(0, 0, 0, 0.4) solid;
+}
+
+table {
+    background-color: rgb(42, 108, 195, .1);
+    border: 3px rgba(0, 0, 0, 0.4) solid !important;
+}
+
+thead {
+    background-color: rgb(42, 108, 195);
+    color: white;
+}
+
 th {
     font-size: 17.5px;
 }
@@ -208,21 +227,28 @@ h1 {
     font-weight: bold;
 }
 
-.connected-user em {
+.connected-user bold {
     text-transform: capitalize;
 }
 
-em {
+bold {
     font-size: larger;
 }
+
+
 
 .nav-item:hover {
     text-decoration: underline;
 }
 
+.navbar-brand {
+    font-family: 'galada';
+    font-size: 25px;
+}
+
 .navbar-brand:hover {
-    font-size: 21px;
-    margin-right: 10.5px;
+    font-size: 27px;
+    margin-right: 7px;
 }
 
 .navbar-light .navbar-brand{
@@ -254,6 +280,10 @@ em {
 
 .card-home-button .card-home-button-event .card-body .btn  .container-fluid:hover{
     background-color: none;
+}
+
+.btn-outline-danger {
+    padding: 5px 10px;
 }
 
 .btn-outline-danger:hover {
@@ -310,6 +340,12 @@ em {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.action-list p {
+    padding-top: 8px;
+    color: brown;
+    font-weight: bold;
 }
 
 .edit-delete-group {
@@ -382,5 +418,17 @@ img {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.ink div {
+    display: flex;
+    flex-direction: row;
+}
+
+.ink p {
+    padding-top: 8px;
+    padding-right: 5em;
+    color: brown;
+    font-weight: bold;
 }
 
