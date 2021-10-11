@@ -34,6 +34,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
      * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add", "reset_password"})
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.")
      */
     private $email;
 
@@ -52,18 +54,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
+     * @Assert\NotBlank(message="Merci de renseigner votre nom de famille")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
+     * @Assert\NotBlank(message="Merci de renseigner votre prénom")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
+     * @Assert\NotBlank(message="Merci de renseigner un pseudo")
      */
     private $nickname;
 
@@ -143,7 +148,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
