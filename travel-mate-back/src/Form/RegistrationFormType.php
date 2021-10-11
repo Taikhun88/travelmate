@@ -38,7 +38,6 @@ class RegistrationFormType extends AbstractType
                 'Homme' => 'Homme'
                 ]])
             ->add('age', IntegerType::class, [
-                'mapped' => false,
                 'required' => false,
                 'constraints' => [new Positive()],
                 'attr' => [
@@ -78,6 +77,9 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'attr' => [
+                'novalidate' => 'novalidate', // comment me to reactivate the html5 validation!  🚥
+            ]
         ]);
     }
 }
