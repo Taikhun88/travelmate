@@ -115,6 +115,17 @@ class EventController extends AbstractController
      */
     public function edit(Request $request, Event $event): Response
     {
+
+        // usually you'll want to make sure the user is authenticated first
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    // returns your User object, or null if the user is not authenticated
+    // use inline documentation to tell your editor your exact User class
+    /** @var \App\Entity\User $user */
+    $user = $this->getUser();
+    // dd($event->getCreator()->getEmail());
+
+    if ($user->getEmail() == $event->getCreator()->getEmail()) {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
@@ -135,6 +146,33 @@ class EventController extends AbstractController
             'event' => $event,
             'form' => $form,
         ]);
+    }
+
+    $this->addFlash('danger', 'vous ne pouvez pas modifier l\'évènement ' . $event->getTitle());
+    return $this->redirectToRoute('backoffice_event_index', [], Response::HTTP_SEE_OTHER);
+
+    
+
+        // $form = $this->createForm(EventType::class, $event);
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+        //     $eventTitle = $event->getTitle();
+
+        // // dd($request);
+
+        //     $this->getDoctrine()->getManager()->flush();
+
+        //     $this->addFlash('success', 'L\'évènement ' . $eventTitle . ' a bien été modifié');
+
+        //     return $this->redirectToRoute('backoffice_event_index', [], Response::HTTP_SEE_OTHER);
+        // }
+
+        // return $this->renderForm('backoffice/event/edit.html.twig', [
+        //     'event' => $event,
+        //     'form' => $form,
+        // ]);
     }
 
     /**
