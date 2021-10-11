@@ -18,7 +18,7 @@ class CallApiService
             $this->client = $client->withOptions([
                 'headers' => [
                     //'x-rapidapi-host' => 'spott.p.rapidapi.com',
-                    'x-rapidapi-key' => '591bcba6cemsh9e0f51ea6c0ad4ep1af5a9jsnc3878cb79cc0'
+                    'x-rapidapi-key' => '47b095e0f8msh6780e41590cafb2p18df69jsn1ea5419d64b3'
                 ],    
             ]);
         }
@@ -27,7 +27,7 @@ class CallApiService
     {
         $response = $this->client->request(
             'GET', 
-            'https://spott.p.rapidapi.com/places/autocomplete?type=COUNTRY&limit=10'
+            'https://spott.p.rapidapi.com/places/autocomplete?type=COUNTRY&limit=20'
         );
 
         return $response->toArray();
@@ -37,7 +37,7 @@ class CallApiService
     {
         $response = $this->client->request(
             'GET', 
-            'https://spott.p.rapidapi.com/places/autocomplete?country=' . $countryCode . '&type=CITY&limit=10'
+            'https://spott.p.rapidapi.com/places/autocomplete?country=' . $countryCode . '&type=CITY&limit=5'
         );     
 
         return $response->toArray();
