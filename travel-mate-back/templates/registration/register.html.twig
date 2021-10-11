@@ -9,7 +9,6 @@
 	{% endfor %}
 
 	<div class="container table-responsive">
-        <form class="row gy-2 gx-3 align-items-center">
 
 		<h1>Inscription</h1>
 
@@ -25,8 +24,9 @@
         }) }}
 		{{ form_row(registrationForm.agreeTerms) }}
 
+        
+
 		<button type="submit" class="btn btn-secondary">Envoyer</button>
 		{{ form_end(registrationForm) }}
-        </form>
 	</div>
 {% endblock %}
