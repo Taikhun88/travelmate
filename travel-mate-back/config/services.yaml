@@ -34,6 +34,10 @@ services:
         autowire: true
         autoconfigure: true
         tags: [serializer.normalizer]
+    tenant_user_service:
+        class: App\Service\UserService
+        arguments: [ '@security.token_storage' ]
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
