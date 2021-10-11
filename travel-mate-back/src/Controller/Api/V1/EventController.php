@@ -98,6 +98,7 @@ class EventController extends AbstractController
             return $this->json($errors, 400);
         }
 
+        // dd($event);
         // we save calling the manager
         $em = $this->getDoctrine()->getManager();
         $em->persist($event);
