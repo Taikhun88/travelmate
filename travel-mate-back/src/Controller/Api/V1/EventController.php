@@ -4,6 +4,7 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\Event;
 use App\Repository\EventRepository;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,7 +76,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator)
+    public function add(Request $request, SerializerInterface $serialiser, ValidatorInterface $validator, UserService $userService)
     {
         // 1) we get the Json
         $jsonData = $request->getContent();
@@ -84,7 +85,6 @@ class EventController extends AbstractController
         // use inline documentation to tell your editor your exact User class
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-
         // 2) we transform the Json to an object
         $event = $serialiser->deserialize($jsonData, Event::class, 'json');
         $event->setCreator($user);
