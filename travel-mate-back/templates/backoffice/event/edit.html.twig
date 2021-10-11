@@ -4,11 +4,15 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Editer</h1>
-
-	{{ include('backoffice/event/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
-	{{ include('backoffice/event/_delete_form.html.twig') }}
-
-	<a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
+	<div class="container">
+		<div class="new-form">
+			<div class="container-fluid add-form mt-4">
+				<h2>Éditer</h2>
+				<button type="button" class="btn btn-outline-secondary mb-4">
+					<a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
+				</button>
+			</div>
+		{{ include('backoffice/event/_form.html.twig') }}
+		</div>
+	</div>
 {% endblock %}

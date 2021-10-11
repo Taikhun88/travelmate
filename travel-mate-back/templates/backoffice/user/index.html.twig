@@ -5,54 +5,120 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Utilisateurs</h1>
+	<div class="container table-responsive">
+		<h1>Liste des utilisateurs</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Email</th>
-				<th>Roles</th>
-				<th>Password</th>
-				<th>Lastname</th>
-				<th>Firstname</th>
-				<th>Nickname</th>
-				<th>Image</th>
-				<th>Age</th>
-				<th>Nationality</th>
-				<th>Language</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for user in users %}
-				<tr>
-					<td>{{ user.id }}</td>
-					<td>{{ user.email }}</td>
-					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-					<td>{{ user.password }}</td>
-					<td>{{ user.lastname }}</td>
-					<td>{{ user.firstname }}</td>
-					<td>{{ user.nickname }}</td>
-					<td>{{ user.image }}</td>
-                    <td>{{ user.age }}</td>
-                    <td>{{ user.nationality }}</td>
-                    <td>{{ user.language }}</td>
-					<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>
-						<a href="{{ path('backoffice_user_show', {'id': user.id}) }}">voir</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="9">no records found</td>
-				</tr>
-			{% endfor %}
+		<div class="ink">
+			<button type="button" class="btn btn-outline-secondary mb-4">
+				<a class="text-decoration-none" href="{{ path('backoffice_user_new') }}">Ajouter un utilisateur</a>
+			</button>
+			<button type="button" class="btn btn-outline-secondary mb-4">
+				<a class="text-decoration-none" href="#admin">Liste des Administrateurs</a>
+			</button>
+		</div>
 
-			<a href="{{ path('backoffice_user_new') }}">Ajouter</a>
-		</tbody>
-	</table>
-	{% endblock %}
+		<table class="table table-striped table-bordered align-middle">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Email</th>
+					<th class="email-table">Roles</th>
+					<th>Nom de famille</th>
+					<th>Prénom(s)</th>
+					<th>Pseudo</th>
+					<th>Age</th>
+					<th>Nationalité</th>
+					<th>Langues parlées</th>
+					<th>Créé(e) le</th>
+					<th>Mis(e) à jour le</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.email }}</td>
+						<td class="email-table">
+							{% if user.roles|length == 2 %}
+								ADMIN 
+								{% else %}
+									USER
+							{% endif %}
+						</td>
+						<td>{{ user.lastname }}</td>
+						<td>{{ user.firstname }}</td>
+						<td>{{ user.nickname }}</td>
+						<td>{{ user.age }}</td>
+						<td>{{ user.nationality }}</td>
+						<td>{{ user.language }}</td>
+						<td>{{ user.createdAt ? user.createdAt|date('Y-m-d') : '' }}</td>
+						<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d') : '' }}</td>
+						<td>
+							<button type="button" class="btn btn-outline-info">
+								<a href="{{ path('backoffice_user_show', {'id': user.id}) }}">voir</a>
+							</button>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<div class="ink mt-5 mb-4">
+			<h2 id="admin">Liste des administrateurs :</h2>
+			<button type="button" class="btn btn-outline-secondary mb-4">
+				<a href="#top">Retour au haut de la page</a>
+			</button>
+		</div>
+		<table class="table table-striped table-bordered align-middle">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Email</th>
+					<th class="email-table">Roles</th>
+					<th>Nom de famille</th>
+					<th>Prénom(s)</th>
+					<th>Pseudo</th>
+					<th>Age</th>
+					<th>Nationalité</th>
+					<th>Langues parlées</th>
+					<th>Créé(e) le</th>
+					<th>Mis(e) à jour le</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+				{% if user.roles|length == 2 %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.email }}</td>
+						<td class="email-table">
+							{% if user.roles|length == 2 %}
+								ADMIN 
+								{% else %}
+									USER
+							{% endif %}
+						</td>
+						<td>{{ user.lastname }}</td>
+						<td>{{ user.firstname }}</td>
+						<td>{{ user.nickname }}</td>
+						<td>{{ user.age }}</td>
+						<td>{{ user.nationality }}</td>
+						<td>{{ user.language }}</td>
+						<td>{{ user.createdAt ? user.createdAt|date('Y-m-d') : '' }}</td>
+						<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d') : '' }}</td>
+						<td>
+							<button type="button" class="btn btn-outline-info">
+								<a href="{{ path('backoffice_user_show', {'id': user.id}) }}">voir</a>
+							</button>
+						</td>
+					</tr>
+				{% endif %}
+					
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
 

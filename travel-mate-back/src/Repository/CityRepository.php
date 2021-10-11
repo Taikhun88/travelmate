@@ -19,6 +19,26 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
+
+
+    /**
+     * method to search events by city and/or category
+     *
+     * @param [type] $city
+     * @param [type] $category
+     * @return City[]
+     */
+    public function searchCityByTitle($cityTitle)
+    {
+         $query = $this->createQueryBuilder('city')
+            // we add a condition to find city by title
+            ->where('city.name LIKE :title')
+            ->setParameter(':title', "%$cityTitle%");
+                return $query
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return City[] Returns an array of City objects
     //  */

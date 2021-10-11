@@ -46,7 +46,7 @@ class Category
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="categories")
      * @Groups({"category_list", "category_show"})
      */
     private $event;
@@ -55,6 +55,11 @@ class Category
     {
         $this->event = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -122,6 +127,7 @@ class Category
     {
         if (!$this->event->contains($event)) {
             $this->event[] = $event;
+            $event->addCategory($this);
         }
 
         return $this;
@@ -129,7 +135,9 @@ class Category
 
     public function removeEvent(Event $event): self
     {
-        $this->event->removeElement($event);
+        if ($this->event->removeElement($event)) {
+            $event->removeCategory($this);
+        }
 
         return $this;
     }

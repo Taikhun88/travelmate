@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet E-mail")
- * @UniqueEntity(fields={"nickname"}, message="Il existe déjà un compte avec cet pseudo")
+ * @UniqueEntity(fields={"nickname"}, message="Il existe déjà un compte avec ce pseudo")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank(message="Merci de remplir les champs requis")
-     * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add"})
+     * @Groups({"event_list", "event_show", "event_update", "search_index", "user_add", "reset_password"})
      */
     private $email;
 
@@ -74,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $image;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint",nullable=true)
      * @Groups({"event_list", "event_show", "event_update", "search_index","user_list","user_show", "user_add"})
      */
     private $age;
@@ -116,7 +116,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $createdEvent;
 
-    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"user_list", "user_show"})
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user_list", "user_show"})
+     */
+    private $gender;
 
     public function getId(): ?int
     {
@@ -385,6 +400,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNickname($nickname)
     {
         $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

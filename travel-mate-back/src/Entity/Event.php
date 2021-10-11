@@ -59,9 +59,10 @@ class Event
     private $participant;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_list","user_show"})
-     * @Assert\NotBlank(message="Please choose a date")
+     * @Assert\GreaterThan("today", message="Please select a date in the future")
+     * @Assert\NotBlank(message="please select a date")
      */
     private $startAt;
 
@@ -84,12 +85,12 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="events")
-     * @Groups({"search_index","event_list", "event_show", "event_add", "event_update", "event_delete"})
+     * @Groups({"search_index","event_list", "event_show", "event_add", "event_update", "event_delete", "event_addUser"})
      */
     private $users;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="event")
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="event")
      * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","user_show"})
      * @Assert\NotBlank(message="Please enter an event category")
      */
@@ -97,7 +98,8 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="event")
-     * @Groups({"search_index", "event_list", "event_show", "event_add", "event_update", "event_delete","category_list", "category_show","user_show"})
+     * @Groups({"search_index", "event_list", "event_show", "event_add","category_list", "category_show","user_show"})
+     * @Assert\NotBlank(message="Please select a city")
      */
     private $city;
 
@@ -114,9 +116,9 @@ class Event
         $this->event = new ArrayCollection();
 
         $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
+        // $this->updatedAt = new DateTimeImmutable();
         $this->startAt = new DateTimeImmutable('tomorrow');
-        $this->status = 'en cours';
+        $this->status = 'A venir';
     }
 
     public function __toString()
@@ -134,7 +136,7 @@ class Event
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -158,7 +160,7 @@ class Event
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
@@ -194,7 +196,7 @@ class Event
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeImmutable $startAt): self
+    public function setStartAt(?\DateTimeImmutable $startAt): self
     {
         $this->startAt = $startAt;
 
@@ -273,7 +275,6 @@ class Event
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
-            $category->addEvent($this);
         }
 
         return $this;
@@ -281,9 +282,7 @@ class Event
 
     public function removeCategory(Category $category): self
     {
-        if ($this->categories->removeElement($category)) {
-            $category->removeEvent($this);
-        }
+        $this->categories->removeElement($category);
 
         return $this;
     }

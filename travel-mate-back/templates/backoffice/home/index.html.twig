@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backoffice Accueil - Travel Mate
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="cards-container container">
+			<h1>{{ welcome_message }}</h1>
+			<p class="hello">Bonjour {{app.user.firstname}}</p>
+			<div class="card mb-3">
+				<div class="row g-0">
+					<div class="card-event col-md-8 text-center">
+					<h4 class="mb-2">Gestion des évenements</h4>
+					<p><small><em> Modifier, supprimer, ajouter un évènement...</em></small></p>
+					</div>
+					<div class="col-md-4">
+						<button class="card-home-button card-home-button-event card-body btn  container-fluid">
+							<a  href="{{ path('backoffice_event_index') }}">Y accéder</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="card mb-3" >
+				<div class="row g-0">
+					<div class="card-category col-md-8 text-center">
+					<h4 class="mb-2">Gestion des catégories</h4>
+					<p><small><em> Modifier, supprimer, ajouter une catégorie...</em></small></p>
+					</div>
+					<div class="col-md-4">
+						<button class="card-home-button card-home-button-category card-body btn container-fluid">
+							<a  href="{{ path('backoffice_category_index') }}">Y accéder</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="card mb-3" >
+				<div class="row g-0">
+					<div class="card-user col-md-8 text-center">
+					<h4 class="mb-2">Gestion des utilisateurs</h4>
+					<p><small><em> Modifier, supprimer, ajouter un utilisateur...</em></small></p>
+					</div>
+					<div class="col-md-4">
+						<button class="card-home-button card-home-button-user card-body btn container-fluid">
+							<a  href="{{ path('backoffice_user_index') }}">Y accéder</a>
+						</button>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+		</div>
+		
+
+
+
+	</div>
+{% endblock %}

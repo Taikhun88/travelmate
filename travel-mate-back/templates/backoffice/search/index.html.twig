@@ -1,36 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Barre de recherche{% endblock %}
 
 {% block body %}
 
+<div class="container mt-5">
+    <form class="search-form d-flex m" action="">
+        <input class="search_input" name="search" class="form-control me-2" type="search" placeholder="Ex : Tokyo" aria-label="Search">
+        <select class="search_select" name="category" id="category-select">
+            <option value="">Merci de choisir une catégorie</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+        </select>
 
-<form class="d-flex m" action="">
-    <input name="search" class="form-control me-2" type="search" placeholder="Ex : ville" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit">Chercher</button>
 
-    <select name="category" id="category-select">
-        <option value="">--Please choose a category--</option>
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
+
+        <button type="button" class="btn btn-outline-secondary">
+            <a href="{{ path('backoffice_event_index') }}">Retour à la liste des événements</a>
+        </button>
+    </form>
+    <table class="table table-striped table-bordered align-middle mt-4">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ville</th>
+                <th>Créateur</th>
+                <th>Événement</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Commence le</th>
+                <th>Statut</th>
+                <th>Créé le</th>
+                <th>Mise à jour le</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for event in results %}
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.city.name}}</td>
+                    <td><a href="{{ path('backoffice_user_show', {'id': event.creator.id}) }}"> {{ event.creator.firstname }} {{event.creator.lastname}}</a></td>
+                    <td>{{ event.title }}</td>
+                    <td class="description_th">{{ event.content }}</td>
+                    <td>{% for category in event.categories %}
+                        {{ category.name }} <br>
+                    {% endfor %}</td>
+                    <td>{{ event.startAt | date('y-m-d') }}</td>
+                    <td>{{ event.status }}</td>
+                    <td>{{ event.createdAt | date('y-m-d') }}</td>
+                    <td>{{ event.updatedAt | date('y-m-d') }}</td>
+                    <td>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('backoffice_event_show', {'id': event.id}) }}">Voir</a>
+                    </button>
+                    </td>
+                </tr>
             {% endfor %}
-    </select>
-
-    <button class="btn btn-outline-secondary" type="submit">GO</button>
-</form>
-
-
-
-
-<h2>
-        Résultats de la recherche : 
-        <em>{{query}}</em>
-    </h2>
-    <ul>
-        {% for event in results %}
-            <li>{{ event.title }}</li>
-            <li>{{ event.city.name }}</li>
-        {% endfor %}
-    </ul>
+        </tbody>
+    </table>
+</div>
 
 
 {% endblock %}

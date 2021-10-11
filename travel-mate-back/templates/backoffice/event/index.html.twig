@@ -4,42 +4,66 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des événements</h1>
+	
+		
+	<div class="container table-responsive">
+		<div class="count">
+			<h1>Liste des événements</h1>
+			<div class="event-to-come rounded">
+				<p class="fs-5 fw-bold"> Évenements à venir : {{ eventsToCome | length }} </p>
+			</div>
+			<div class="event-over rounded">
+				<p class="fs-5 fw-bold"> Évenements terminés : {{ eventOver | length }} </p>
+			</div>
+		</div>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>City ID</th>
-				<th>Creator ID</th>
-				<th>Nom de l'événement</th>
-				<th>Description</th>
-				<th>Nombre de participants</th>
-				<th>Date de début</th>
-				<th>Statut</th>
-				<th>Créé le</th>
-				<th>Mis à jour le</th>
-			</tr>
-		</thead>
-		<tbody>
-		<a href="{{ path('backoffice_event_new') }}">Ajouter un événement</a>
-			{% for event in events %}
+		
+		<button type="button" class="btn btn-add-event btn-outline-secondary mb-4">
+			<a class="text-decoration-none" href="{{ path('backoffice_event_new') }}">Ajouter un événement</a>
+		</button>
+		<button type="button" class="btn btn-outline-secondary mb-4">
+			<a class="text-decoration-none" href="{{ path('backoffice_search') }}">Rechercher un évènement <img src="{{ asset('images/SVG/loupe.svg') }}" width="15" height="15" alt=""></a>
+		</button>
+		<table class="table table-striped table-bordered align-middle">
+			<thead>
 				<tr>
-					<td>{{ event.id }}</td>
-					<td>{{ event.city.name }}</td>
-					<td>{{ event.creator.id }}</td>
-					<td>{{ event.title }}</td>
-					<td>{{ event.content }}</td>
-					<td>{{ event.participant }}</td>
-					<td>{{ event.startAt | date('y-m-d') }}</td>
-					<td>{{ event.status }}</td>
-					<td>{{ event.createdAt | date('y-m-d') }}</td>
-					<td>{{ event.updatedAt | date('y-m-d') }}</td>
-					<td>
-						<a href="{{ path('backoffice_event_show', {'id': event.id}) }}">Voir</a>
-					</td>
+					<th>Id</th>
+					<th>Ville</th>
+					<th>Créateur</th>
+					<th>Événement</th>
+					<th>Description</th>
+					<th>Catégorie</th>
+					<th>Commence le</th>
+					<th>Statut</th>
+					<th>Créé le</th>
+					<th>Mise à jour le</th>
+					<th></th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+			
+				{% for event in events %}
+					<tr>
+						<td>{{ event.id }}</td>
+						<td>{{ event.city.name}}</td>
+						<td><a href="{{ path('backoffice_user_show', {'id': event.creator.id}) }}"> {{ event.creator.firstname }} {{event.creator.lastname}}</a></td>
+						<td>{{ event.title }}</td>
+						<td class="description_th">{{ event.content }}</td>
+						<td>{% for category in event.categories %}
+							{{ category.name }} <br>
+						{% endfor %}</td>
+						<td>{{ event.startAt | date('y-m-d') }}</td>
+						<td>{{ event.status }}</td>
+						<td>{{ event.createdAt | date('y-m-d') }}</td>
+						<td>{{ event.updatedAt | date('y-m-d') }}</td>
+						<td>
+						<button type="button" class="btn btn-outline-secondary">
+							<a href="{{ path('backoffice_event_show', {'id': event.id}) }}">Voir</a>
+						</button>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

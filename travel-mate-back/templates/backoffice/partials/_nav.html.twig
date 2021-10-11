@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand navbar-light" href="{{ path('backoffice_home') }}">Travel Mate</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link{{ currentRoute == 'backoffice_event_index' ? ' active':'' }}" aria-current="page" href="{{ path('backoffice_event_index') }}">Évenements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link{{ currentRoute in ['backoffice_category_index', 'backoffice_category_show'] ? ' active':'' }}" href="{{ path('backoffice_category_index') }}">Catégories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link{{ currentRoute in ['backoffice_user_index', 'backoffice_user_index'] ? ' active':'' }}" href="{{ path('backoffice_user_index') }}">Utilisateurs</a>
+        </li>
+      </ul>
+        {% if app.user %}
+          <div class="connected">
+            <div class="connected-user">
+              <p>Vous etes connecté en tant que : <strong><bold>{{ app.user.firstname }} {{ app.user.lastname }}</bold></strong></p>
+            </div>
+            <button type="button" class="btn btn-logout">
+              <a class="text-decoration-none" href="{{ path('app_logout') }}">se déconnecter</a>
+            </button>
+          </div>
+        {% else %}
+            <button type="button" class="btn btn-login">
+              <a class="text-decoration-none" href="{{ path('app_login') }}">Se connecter</a>
+            </button>
+        {% endif %}
+        
+    </div>
+  </div>
+</nav>

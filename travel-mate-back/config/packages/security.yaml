@@ -15,12 +15,30 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            jwt: ~
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
             provider: app_user_provider
+            custom_authenticator: App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -30,6 +48,17 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    # /api/v1/event/subscription
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/backoffice, roles: ROLE_ADMIN }
+#         - { path: ^/, roles: ROLE_USER }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/v1/event/removal,       roles: ROLE_USER }
+        - { path: ^/api/v1/event/subscription,       roles: ROLE_USER }
+        - { path: ^/api/v1/event,       roles: IS_AUTHENTICATED_FULLY, methods: [POST]}
+        - { path: ^/api/v1/event,       roles: PUBLIC_ACCESS }
+        - { path: ^/api/v1/category,       roles: PUBLIC_ACCESS }
+        - { path: ^/api,       roles: PUBLIC_ACCESS }
+
+    role_hierarchy:
+        ROLE_ADMIN:         ROLE_USER
