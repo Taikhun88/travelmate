@@ -14,9 +14,9 @@
 				</button>
 				{{ include('backoffice/event/_delete_form.html.twig') }}
 			</div>
-				{% if event.users is empty %}
-					<p>Aucun utilisateur ne participe à l'évènement</p>
-				{% endif %}
+			{% if event.users is empty %}
+				<p>Aucun utilisateur ne participe à l'évènement</p>
+			{% endif %}
 			<div>
 				{% if event.users is not empty %}
 					<button type="button" class="btn btn-outline-secondary mb-4">
@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<th>Intitulé de l'événement</th>
-					<td>{{ event.title}}</td>
+					<td>{{ event.title }}</td>
 				</tr>
 				<tr class="description">
 					<th class="description-th">Description</th>
@@ -70,7 +70,7 @@
 			</tbody>
 		</table>
 
-		{% if event.users is not empty %}	
+		{% if event.users is not empty %}
 			<div class="ink mt-5 mb-4">
 				<h2 id="users">Liste des participants à l'évènement :</h2>
 				<button type="button" class="btn btn-outline-secondary mb-4">
@@ -101,9 +101,9 @@
 							<td>{{ user.email }}</td>
 							<td class="email-table">
 								{% if user.roles|length == 2 %}
-									ADMIN 
-									{% else %}
-										USER
+									ADMIN
+								{% else %}
+									USER
 								{% endif %}
 							</td>
 							<td>{{ user.lastname }}</td>
@@ -127,9 +127,8 @@
 	</div>
 
 
-
 	{# This delete button redirects the show page to the delete form thanks to the route
-			Route is composed with path 1st parameter which is the name of the route in our Controller
-			2nd parameter, as we need to specify an ID of the event, we add this information #}
+				Route is composed with path 1st parameter which is the name of the route in our Controller
+				2nd parameter, as we need to specify an ID of the event, we add this information #}
 
 {% endblock %}
