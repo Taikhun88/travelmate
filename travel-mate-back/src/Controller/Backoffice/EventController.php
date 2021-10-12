@@ -29,9 +29,9 @@ class EventController extends AbstractController
         // This method puts lists data in a JSON array
         $events = $eventRepository->findBy(array(), array('id' => 'DESC'));
 
-        $eventToCome = $eventRepository->findBy(array('status' => 'A venir'));
+        $eventToCome = $eventRepository->findBy(array('status' => 'Start soon'));
 
-        $eventOver = $eventRepository->findBy(array('status' => 'terminé'));
+        $eventOver = $eventRepository->findBy(array('status' => 'Finished'));
         // dd($eventToCome);
 
         // Displays all data on the twig thanks to the variable events
